@@ -7,7 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.ui.Modifier
-import mx.dev.cmg.android.code.ui.feature.main.layout.MainLayout
+import mx.dev.cmg.android.code.ui.navigation.MainNavHost
 import mx.dev.cmg.android.code.ui.theme.CodeTheme
 
 class MainActivity : ComponentActivity() {
@@ -16,7 +16,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CodeTheme {
-                MainLayout(
+                MainNavHost(
                     modifier = Modifier
                         .systemBarsPadding()
                         .fillMaxSize()
