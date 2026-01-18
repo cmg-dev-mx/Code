@@ -3,7 +3,6 @@ package mx.dev.cmg.android.code.ui.navigation
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
@@ -13,6 +12,7 @@ import androidx.navigation3.ui.NavDisplay
 import kotlinx.serialization.Serializable
 import mx.dev.cmg.android.code.ui.feature.main.layout.MainLayout
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Serializable
 data object Main: NavKey
@@ -31,7 +31,7 @@ fun MainNavHost(modifier: Modifier = Modifier) {
         entryProvider = entryProvider {
             entry<Main> {
 
-                val vm: MainViewModel = viewModel()
+                val vm: MainViewModel = koinViewModel()
 
                 MainLayout(
                     modifier = Modifier.fillMaxSize(),
