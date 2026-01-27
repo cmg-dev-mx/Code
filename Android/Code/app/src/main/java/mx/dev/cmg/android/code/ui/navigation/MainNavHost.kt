@@ -3,7 +3,7 @@ package mx.dev.cmg.android.code.ui.navigation
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
@@ -31,7 +31,7 @@ fun MainNavHost(modifier: Modifier = Modifier) {
         entryProvider = entryProvider {
             entry<Main> {
 
-                val vm: MainViewModel = viewModel()
+                val vm: MainViewModel = hiltViewModel()
 
                 MainLayout(
                     modifier = Modifier.fillMaxSize(),
