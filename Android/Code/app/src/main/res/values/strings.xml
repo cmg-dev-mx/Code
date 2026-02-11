@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Code</string>
+    <string name="remote_configuration_items">Configuración remota</string>
 </resources>
