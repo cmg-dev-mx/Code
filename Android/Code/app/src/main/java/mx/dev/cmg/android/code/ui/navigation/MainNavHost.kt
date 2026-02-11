@@ -18,6 +18,9 @@ import mx.dev.cmg.android.code.ui.feature.main.layout.MainLayout
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainSideEffect
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainViewModel
 import mx.dev.cmg.android.code.ui.feature.remoteconfig.layout.RemoteConfigListLayout
+import mx.dev.cmg.android.code.ui.feature.remoteconfig.viewmodel.RemoteConfigListSideEffect
+import mx.dev.cmg.android.code.ui.feature.remoteconfig.viewmodel.RemoteConfigListUiState
+import mx.dev.cmg.android.code.ui.feature.remoteconfig.viewmodel.RemoteConfigListViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Serializable
@@ -39,7 +42,6 @@ fun MainNavHost(modifier: Modifier = Modifier) {
         backStack = backStack,
         entryProvider = entryProvider {
             entry<Main> {
-
                 val vm: MainViewModel = koinViewModel()
                 val uiState by vm.uiState.collectAsStateWithLifecycle()
 
@@ -61,7 +63,24 @@ fun MainNavHost(modifier: Modifier = Modifier) {
             }
 
             entry<RemoteConfigList> {
-                RemoteConfigListLayout(modifier = Modifier.fillMaxSize())
+                val vm: RemoteConfigListViewModel = koinViewModel()
+                val uiState by vm.uiState.collectAsStateWithLifecycle()
+
+                LaunchedEffect(Unit) {
+                    vm.sideEffect.collect { sideEffect ->
+                        when (sideEffect) {
+                            is RemoteConfigListSideEffect.NavigateBack -> {
+                                backStack.removeLastOrNull()
+                            }
+                        }
+                    }
+                }
+
+                RemoteConfigListLayout(
+                    modifier = Modifier.fillMaxSize(),
+                    uiState = uiState,
+                    onEvent = vm::onEvent
+                )
             }
         }
     )

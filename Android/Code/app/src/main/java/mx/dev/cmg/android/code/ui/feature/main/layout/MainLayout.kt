@@ -1,11 +1,10 @@
 package mx.dev.cmg.android.code.ui.feature.main.layout
 
 import androidx.annotation.DrawableRes
-import androidx.annotation.IntegerRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,6 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import mx.dev.cmg.android.code.R
+import mx.dev.cmg.android.code.ui.atomicdesign.particle.Title
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainEvent
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainUiState
 
@@ -34,17 +34,31 @@ fun MainLayout(
     onEvent: (MainEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    LazyColumn(
-        modifier = modifier.padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+    Column(
+        modifier = modifier
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        item {
-            MainItem(
-                modifier = Modifier.fillMaxWidth(),
-                title = stringResource(R.string.remote_configuration_items),
-                icon = R.drawable.ic_remote_config,
-                onClick = { onEvent(MainEvent.NavigateToRemoteConfigList) }
-            )
+        Title(
+            modifier = Modifier.fillMaxWidth(),
+            title = stringResource(R.string.app_name),
+            icon = R.drawable.ic_launcher_foreground
+        )
+
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            item {
+                MainItem(
+                    modifier = Modifier.fillMaxWidth(),
+                    title = stringResource(R.string.remote_configuration_items),
+                    icon = R.drawable.ic_remote_config,
+                    onClick = { onEvent(MainEvent.NavigateToRemoteConfigList) }
+                )
+            }
         }
     }
 }
