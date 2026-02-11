@@ -52,7 +52,9 @@ fun Title(
 @Composable
 private fun Preview() {
     Title(
-        modifier = Modifier.fillMaxWidth().padding(16.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
         title = "Title",
         icon = R.drawable.ic_launcher_foreground,
         iconDescription = "Info Icon"

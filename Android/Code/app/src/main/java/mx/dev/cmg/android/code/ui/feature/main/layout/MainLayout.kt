@@ -54,9 +54,9 @@ fun MainLayout(
             item {
                 MainItem(
                     modifier = Modifier.fillMaxWidth(),
-                    title = stringResource(R.string.remote_configuration_items),
+                    title = stringResource(R.string.lista_nombres),
                     icon = R.drawable.ic_remote_config,
-                    onClick = { onEvent(MainEvent.NavigateToRemoteConfigList) }
+                    onClick = { onEvent(MainEvent.NavigateToNameList) }
                 )
             }
         }
@@ -99,8 +99,7 @@ private fun MainItem(
 private fun Preview() {
     MainLayout(
         uiState = MainUiState(
-            isLoading = true,
-            name = "Code"
+            isLoading = true
         ),
         onEvent = {},
         modifier = Modifier.fillMaxSize()

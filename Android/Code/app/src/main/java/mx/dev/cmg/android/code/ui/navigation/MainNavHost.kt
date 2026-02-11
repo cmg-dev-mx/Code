@@ -16,10 +16,16 @@ import kotlinx.serialization.Serializable
 import mx.dev.cmg.android.code.ui.feature.main.layout.MainLayout
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainSideEffect
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainViewModel
+import mx.dev.cmg.android.code.ui.feature.mvidemo.layout.NameListLayout
+import mx.dev.cmg.android.code.ui.feature.mvidemo.viewmodel.NameListSideEffect
+import mx.dev.cmg.android.code.ui.feature.mvidemo.viewmodel.NameListViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Serializable
-data object Main: NavKey
+data object Main : NavKey
+
+@Serializable
+data object NameList : NavKey
 
 @Composable
 fun MainNavHost(modifier: Modifier = Modifier) {
@@ -40,14 +46,36 @@ fun MainNavHost(modifier: Modifier = Modifier) {
                 LaunchedEffect(Unit) {
                     vm.sideEffect.collect { sideEffect ->
                         when (sideEffect) {
-                            is MainSideEffect.NavigateToRemoteConfigList -> {
-                                // backStack.add(RemoteConfigList)
+                            is MainSideEffect.NavigateToNameList -> {
+                                backStack.add(NameList)
                             }
                         }
                     }
                 }
 
                 MainLayout(
+                    modifier = Modifier.fillMaxSize(),
+                    uiState = uiState,
+                    onEvent = vm::onEvent
+                )
+            }
+
+            entry<NameList> {
+                val vm: NameListViewModel = koinViewModel()
+                val uiState by vm.uiState.collectAsStateWithLifecycle()
+
+                LaunchedEffect(Unit) {
+                    vm.sideEffect.collect { sideEffect ->
+                        when (sideEffect) {
+                            is NameListSideEffect.NavigateBack -> {
+                                backStack.removeLastOrNull()
+                            }
+
+                        }
+                    }
+                }
+
+                NameListLayout(
                     modifier = Modifier.fillMaxSize(),
                     uiState = uiState,
                     onEvent = vm::onEvent

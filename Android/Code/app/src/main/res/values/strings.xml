@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Code</string>
-    <string name="remote_configuration_items">Configuración remota</string>
-    <string name="return_back">Return back</string>
-    <string name="no_remote_config_items">No se encontraron registros en la configuración remota</string>
+    <string name="configuracion_remota">Configuración remota</string>
+    <string name="regresar">Regresar</string>
+    <string name="lista_nombres">Lista de Nombres</string>
+    <string name="escribe_nombre">Escribe un nombre</string>
+    <string name="agregar">Agregar</string>
+    <string name="no_hay_nombres">No se han agregado ningún nombre</string>
 </resources>
