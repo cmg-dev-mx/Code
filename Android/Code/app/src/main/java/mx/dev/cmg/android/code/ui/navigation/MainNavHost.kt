@@ -6,7 +6,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
@@ -17,17 +16,10 @@ import kotlinx.serialization.Serializable
 import mx.dev.cmg.android.code.ui.feature.main.layout.MainLayout
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainSideEffect
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainViewModel
-import mx.dev.cmg.android.code.ui.feature.remoteconfig.layout.RemoteConfigListLayout
-import mx.dev.cmg.android.code.ui.feature.remoteconfig.viewmodel.RemoteConfigListSideEffect
-import mx.dev.cmg.android.code.ui.feature.remoteconfig.viewmodel.RemoteConfigListUiState
-import mx.dev.cmg.android.code.ui.feature.remoteconfig.viewmodel.RemoteConfigListViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @Serializable
 data object Main: NavKey
-
-@Serializable
-data object RemoteConfigList: NavKey
 
 @Composable
 fun MainNavHost(modifier: Modifier = Modifier) {
@@ -49,34 +41,13 @@ fun MainNavHost(modifier: Modifier = Modifier) {
                     vm.sideEffect.collect { sideEffect ->
                         when (sideEffect) {
                             is MainSideEffect.NavigateToRemoteConfigList -> {
-                                backStack.add(RemoteConfigList)
+                                // backStack.add(RemoteConfigList)
                             }
                         }
                     }
                 }
 
                 MainLayout(
-                    modifier = Modifier.fillMaxSize(),
-                    uiState = uiState,
-                    onEvent = vm::onEvent
-                )
-            }
-
-            entry<RemoteConfigList> {
-                val vm: RemoteConfigListViewModel = koinViewModel()
-                val uiState by vm.uiState.collectAsStateWithLifecycle()
-
-                LaunchedEffect(Unit) {
-                    vm.sideEffect.collect { sideEffect ->
-                        when (sideEffect) {
-                            is RemoteConfigListSideEffect.NavigateBack -> {
-                                backStack.removeLastOrNull()
-                            }
-                        }
-                    }
-                }
-
-                RemoteConfigListLayout(
                     modifier = Modifier.fillMaxSize(),
                     uiState = uiState,
                     onEvent = vm::onEvent
