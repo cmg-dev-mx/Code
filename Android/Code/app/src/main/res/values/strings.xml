@@ -6,4 +6,6 @@
     <string name="escribe_nombre">Escribe un nombre</string>
     <string name="agregar">Agregar</string>
     <string name="no_hay_nombres">No se han agregado ningún nombre</string>
+    <string name="ejemplo_crash">Ejemplo de Crash</string>
+    <string name="provocar_crash">Provocar Crash</string>
 </resources>

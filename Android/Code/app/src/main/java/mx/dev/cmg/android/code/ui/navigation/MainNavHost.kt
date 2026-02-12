@@ -13,6 +13,7 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import kotlinx.serialization.Serializable
+import mx.dev.cmg.android.code.ui.feature.crash.layout.CrashLayout
 import mx.dev.cmg.android.code.ui.feature.main.layout.MainLayout
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainSideEffect
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainViewModel
@@ -21,11 +22,9 @@ import mx.dev.cmg.android.code.ui.feature.mvidemo.viewmodel.NameListSideEffect
 import mx.dev.cmg.android.code.ui.feature.mvidemo.viewmodel.NameListViewModel
 import org.koin.androidx.compose.koinViewModel
 
-@Serializable
-data object Main : NavKey
-
-@Serializable
-data object NameList : NavKey
+@Serializable data object Main : NavKey
+@Serializable data object NameList : NavKey
+@Serializable data object Crashlytics : NavKey
 
 @Composable
 fun MainNavHost(modifier: Modifier = Modifier) {
@@ -46,9 +45,8 @@ fun MainNavHost(modifier: Modifier = Modifier) {
                 LaunchedEffect(Unit) {
                     vm.sideEffect.collect { sideEffect ->
                         when (sideEffect) {
-                            is MainSideEffect.NavigateToNameList -> {
-                                backStack.add(NameList)
-                            }
+                            is MainSideEffect.NavigateToNameList -> backStack.add(NameList)
+                            is MainSideEffect.NavigateToCrashlytics -> backStack.add(Crashlytics)
                         }
                     }
                 }
@@ -79,6 +77,12 @@ fun MainNavHost(modifier: Modifier = Modifier) {
                     modifier = Modifier.fillMaxSize(),
                     uiState = uiState,
                     onEvent = vm::onEvent
+                )
+            }
+
+            entry<Crashlytics> {
+                CrashLayout(
+                    modifier = Modifier.fillMaxSize()
                 )
             }
         }
