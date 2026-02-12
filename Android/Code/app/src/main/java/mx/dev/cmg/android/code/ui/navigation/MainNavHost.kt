@@ -14,6 +14,8 @@ import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import kotlinx.serialization.Serializable
 import mx.dev.cmg.android.code.ui.feature.crash.layout.CrashLayout
+import mx.dev.cmg.android.code.ui.feature.crash.viewmodel.CrashSideEffect
+import mx.dev.cmg.android.code.ui.feature.crash.viewmodel.CrashViewModel
 import mx.dev.cmg.android.code.ui.feature.main.layout.MainLayout
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainSideEffect
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainViewModel
@@ -65,9 +67,7 @@ fun MainNavHost(modifier: Modifier = Modifier) {
                 LaunchedEffect(Unit) {
                     vm.sideEffect.collect { sideEffect ->
                         when (sideEffect) {
-                            is NameListSideEffect.NavigateBack -> {
-                                backStack.removeLastOrNull()
-                            }
+                            is NameListSideEffect.NavigateBack -> backStack.removeLastOrNull()
 
                         }
                     }
@@ -81,8 +81,20 @@ fun MainNavHost(modifier: Modifier = Modifier) {
             }
 
             entry<Crashlytics> {
+                val vm: CrashViewModel = koinViewModel()
+
+                LaunchedEffect(Unit) {
+                    vm.sideEffect.collect { sideEffect ->
+                        when (sideEffect) {
+                            is CrashSideEffect.NavigateBack -> backStack.removeLastOrNull()
+                        }
+                    }
+                }
+
+
                 CrashLayout(
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize(),
+                    onEvent = vm::onEvent
                 )
             }
         }

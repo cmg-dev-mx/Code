@@ -17,9 +17,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import mx.dev.cmg.android.code.R
 import mx.dev.cmg.android.code.ui.atomicdesign.particle.Title
+import mx.dev.cmg.android.code.ui.feature.crash.viewmodel.CrashEvent
 
 @Composable
 fun CrashLayout(
+    onEvent: (CrashEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -33,10 +35,11 @@ fun CrashLayout(
             modifier = Modifier.fillMaxWidth(),
             title = stringResource(R.string.ejemplo_crash),
             icon = R.drawable.ic_arrow_back,
+            onIconClick = { onEvent(CrashEvent.NavigateBack) }
         )
 
         Button(
-            onClick = { throw RuntimeException("¡Esto es un crash de ejemplo!") }
+            onClick = { onEvent(CrashEvent.OnCrashButtonClicked) }
         ) {
             Text(text = stringResource(R.string.provocar_crash))
         }
@@ -46,5 +49,8 @@ fun CrashLayout(
 @Preview
 @Composable
 private fun Preview() {
-    CrashLayout(modifier = Modifier.fillMaxSize())
+    CrashLayout(
+        modifier = Modifier.fillMaxSize(),
+        onEvent = {}
+    )
 }
