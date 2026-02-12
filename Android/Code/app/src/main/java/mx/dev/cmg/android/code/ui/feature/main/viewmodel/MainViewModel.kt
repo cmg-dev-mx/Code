@@ -30,14 +30,14 @@ class MainViewModel(
         viewModelScope.launch {
             when (event) {
                 is MainEvent.NavigateToNameList -> navigateToRemoteConfigList()
+                is MainEvent.NavigateToCrashlytics -> navigateToCrashlytics()
             }
         }
     }
 
     private suspend fun loadData() {
         repository.getAvailableFeatures().collect { features ->
-            val featuresUI = features.mapNotNull { FeatureUI.from(it) }
-
+            val featuresUI = features.map { FeatureUI.from(it) }
 
             _uiState.value = uiState.value.copy(
                 availableFeatures = featuresUI
@@ -47,5 +47,9 @@ class MainViewModel(
 
     private suspend fun navigateToRemoteConfigList() {
         _sideEffect.send(MainSideEffect.NavigateToNameList)
+    }
+
+    private suspend fun navigateToCrashlytics() {
+        _sideEffect.send(MainSideEffect.NavigateToCrashlytics)
     }
 }

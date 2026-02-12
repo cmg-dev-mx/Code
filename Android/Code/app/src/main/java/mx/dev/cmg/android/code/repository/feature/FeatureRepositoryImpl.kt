@@ -14,6 +14,9 @@ class FeatureRepositoryImpl(
             if (source.getBoolean("mvi")) {
                 add(Feature.MVI)
             }
+            if (source.getBoolean("crash")) {
+                add(Feature.CRASHLYTICS)
+            }
         })
     }
 }

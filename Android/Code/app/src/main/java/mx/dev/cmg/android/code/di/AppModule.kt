@@ -4,6 +4,7 @@ import mx.dev.cmg.android.code.repository.feature.FeatureRepository
 import mx.dev.cmg.android.code.repository.feature.FeatureRepositoryImpl
 import mx.dev.cmg.android.code.source.remoteconfig.RemoteConfigSource
 import mx.dev.cmg.android.code.source.remoteconfig.RemoteConfigSourceImpl
+import mx.dev.cmg.android.code.ui.feature.crash.viewmodel.CrashViewModel
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainViewModel
 import mx.dev.cmg.android.code.ui.feature.mvidemo.viewmodel.NameListViewModel
 import org.koin.core.module.dsl.bind
@@ -21,4 +22,5 @@ val appModule = module {
     // ViewModels
     viewModelOf(::MainViewModel)
     viewModelOf(::NameListViewModel)
+    viewModelOf(::CrashViewModel)
 }

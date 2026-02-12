@@ -13,12 +13,19 @@ enum class FeatureUI(
         displayName = R.string.lista_nombres,
         icon = R.drawable.ic_remote_config,
         onClickEvent = MainEvent.NavigateToNameList
+    ),
+
+    CRASHLYTICS(
+        displayName = R.string.provocar_crash,
+        icon = R.drawable.ic_bug,
+        onClickEvent = MainEvent.NavigateToCrashlytics
     );
 
     companion object {
-        fun from(feature: Feature): FeatureUI? {
+        fun from(feature: Feature): FeatureUI {
             return when (feature) {
                 Feature.MVI -> MVI
+                Feature.CRASHLYTICS -> CRASHLYTICS
             }
         }
     }
