@@ -10,7 +10,7 @@ kotlin = "2.3.10"
 composeBom = "2026.02.00"
 nav3Core = "1.0.1"
 nav3ViewModel = "2.10.0"
-koinBom = "4.2.0"
+koinBom = "4.1.1"
 googleServices = "4.4.4"
 firebaseBom = "34.9.0"
 
@@ -35,7 +35,6 @@ androidx-navigation3-viewmodel = { group = "androidx.lifecycle", name = "lifecyc
 koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koinBom" }
 koin-android = { group = "io.insert-koin", name = "koin-android"}
 koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose"}
-koin-navigation3 = { group = "io.insert-koin", name = "koin-compose-navigation3"}
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-config = { group = "com.google.firebase", name = "firebase-config" }

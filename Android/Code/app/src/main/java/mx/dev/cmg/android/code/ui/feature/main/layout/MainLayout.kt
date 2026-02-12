@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -25,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import mx.dev.cmg.android.code.R
 import mx.dev.cmg.android.code.ui.atomicdesign.particle.Title
+import mx.dev.cmg.android.code.ui.feature.main.model.FeatureUI
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainEvent
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainUiState
 
@@ -51,12 +53,12 @@ fun MainLayout(
                 .weight(1f),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            item {
+            items(uiState.availableFeatures) { feature ->
                 MainItem(
                     modifier = Modifier.fillMaxWidth(),
-                    title = stringResource(R.string.lista_nombres),
-                    icon = R.drawable.ic_remote_config,
-                    onClick = { onEvent(MainEvent.NavigateToNameList) }
+                    title = stringResource(feature.displayName),
+                    icon = feature.icon,
+                    onClick = { onEvent(feature.onClickEvent) }
                 )
             }
         }
@@ -99,7 +101,10 @@ private fun MainItem(
 private fun Preview() {
     MainLayout(
         uiState = MainUiState(
-            isLoading = true
+            isLoading = false,
+            availableFeatures = listOf(
+                FeatureUI.MVI
+            )
         ),
         onEvent = {},
         modifier = Modifier.fillMaxSize()
