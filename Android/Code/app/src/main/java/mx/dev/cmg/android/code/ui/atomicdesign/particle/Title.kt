@@ -1,13 +1,14 @@
 package mx.dev.cmg.android.code.ui.atomicdesign.particle
 
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,14 +32,18 @@ fun Title(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Icon(
-            modifier = Modifier
-                .size(48.dp)
-                .clickable(onIconClick != null) { onIconClick?.invoke() },
-            tint = MaterialTheme.colorScheme.onBackground,
-            painter = painterResource(icon),
-            contentDescription = iconDescription
-        )
+        IconButton(
+            modifier = Modifier.size(48.dp),
+            onClick = { onIconClick?.invoke() },
+            enabled = onIconClick != null
+        ){
+            Icon(
+                modifier = Modifier.fillMaxSize(),
+                tint = MaterialTheme.colorScheme.onBackground,
+                painter = painterResource(icon),
+                contentDescription = iconDescription
+            )
+        }
 
         Text(
             style = MaterialTheme.typography.headlineMedium,
