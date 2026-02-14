@@ -2,9 +2,7 @@ package mx.dev.cmg.android.code.ui.navigation
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
@@ -12,17 +10,12 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import kotlinx.serialization.Serializable
-import mx.dev.cmg.android.code.ui.feature.crash.layout.CrashLayout
+import mx.dev.cmg.android.code.ui.feature.crash.layout.CrashScreen
 import mx.dev.cmg.android.code.ui.feature.crash.viewmodel.CrashSideEffect
-import mx.dev.cmg.android.code.ui.feature.crash.viewmodel.CrashViewModel
-import mx.dev.cmg.android.code.ui.feature.main.layout.MainLayout
+import mx.dev.cmg.android.code.ui.feature.main.layout.MainScreen
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainSideEffect
-import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainViewModel
-import mx.dev.cmg.android.code.ui.feature.mvidemo.layout.NameListLayout
+import mx.dev.cmg.android.code.ui.feature.mvidemo.layout.NameListScreen
 import mx.dev.cmg.android.code.ui.feature.mvidemo.viewmodel.NameListSideEffect
-import mx.dev.cmg.android.code.ui.feature.mvidemo.viewmodel.NameListViewModel
-import mx.dev.cmg.android.code.ui.util.collectAsEffect
-import org.koin.androidx.compose.koinViewModel
 
 @Serializable data object Main : NavKey
 @Serializable data object NameList : NavKey
@@ -41,52 +34,40 @@ fun MainNavHost(modifier: Modifier = Modifier) {
         backStack = backStack,
         entryProvider = entryProvider {
             entry<Main> {
-                val vm: MainViewModel = koinViewModel()
-                val uiState by vm.uiState.collectAsStateWithLifecycle()
-
-                vm.sideEffect.collectAsEffect { sideEffect ->
-                    when (sideEffect) {
-                        is MainSideEffect.NavigateToNameList -> backStack.add(NameList)
-                        is MainSideEffect.NavigateToCrashlytics -> backStack.add(Crashlytics)
-                    }
-                }
-
-                MainLayout(
+                MainScreen(
                     modifier = Modifier.fillMaxSize(),
-                    uiState = uiState,
-                    onEvent = vm::onEvent
+                    onNavigation = { sideEffect ->
+                        when (sideEffect) {
+                            MainSideEffect.NavigateToNameList ->
+                                backStack.navigateTo(NameList)
+                            MainSideEffect.NavigateToCrashlytics ->
+                                backStack.navigateTo(Crashlytics)
+                        }
+                    }
                 )
             }
 
             entry<NameList> {
-                val vm: NameListViewModel = koinViewModel()
-                val uiState by vm.uiState.collectAsStateWithLifecycle()
-
-                vm.sideEffect.collectAsEffect { sideEffect ->
-                    when (sideEffect) {
-                        is NameListSideEffect.NavigateBack -> backStack.removeLastOrNull()
-                    }
-                }
-
-                NameListLayout(
+                NameListScreen(
                     modifier = Modifier.fillMaxSize(),
-                    uiState = uiState,
-                    onEvent = vm::onEvent
+                    onNavigation = { sideEffect ->
+                        when (sideEffect) {
+                            NameListSideEffect.NavigateBack ->
+                                backStack.navigateBack()
+                        }
+                    }
                 )
             }
 
             entry<Crashlytics> {
-                val vm: CrashViewModel = koinViewModel()
-
-                vm.sideEffect.collectAsEffect { sideEffect ->
-                    when (sideEffect) {
-                        is CrashSideEffect.NavigateBack -> backStack.removeLastOrNull()
-                    }
-                }
-
-                CrashLayout(
+                CrashScreen(
                     modifier = Modifier.fillMaxSize(),
-                    onEvent = vm::onEvent
+                    onNavigation = { sideEffect ->
+                        when (sideEffect) {
+                            CrashSideEffect.NavigateBack ->
+                                backStack.navigateBack()
+                        }
+                    }
                 )
             }
         }
