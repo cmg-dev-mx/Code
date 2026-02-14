@@ -1,51 +1,43 @@
 package mx.dev.cmg.android.code.ui.feature.mvidemo.viewmodel
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.launch
+import mx.dev.cmg.android.code.ui.base.viewmodel.MviViewModel
 import kotlin.time.Duration.Companion.seconds
 
-class NameListViewModel : ViewModel() {
+class NameListViewModel : MviViewModel<NameListUiState, NameListEvent, NameListSideEffect>(
+    initialState = NameListUiState()
+) {
+    override suspend fun handleEvent(event: NameListEvent) = when (event) {
+        is NameListEvent.TypedNameChange -> updateTypedName(event.newName)
+        is NameListEvent.AddName -> addName()
+        is NameListEvent.NavigateBack -> emitSideEffect(NameListSideEffect.NavigateBack)
+    }
 
-    private val _uiState = MutableStateFlow(NameListUiState())
-    val uiState = _uiState.asStateFlow()
-
-    private val _sideEffect = Channel<NameListSideEffect>(Channel.BUFFERED)
-    val sideEffect = _sideEffect.receiveAsFlow()
-
-    fun onEvent(event: NameListEvent) {
-        viewModelScope.launch {
-            when (event) {
-                is NameListEvent.NavigateBack -> navigateBack()
-                is NameListEvent.TypedNameChange -> updateTypedName(event.newName)
-                is NameListEvent.AddName -> addName()
-            }
+    private fun updateTypedName(newName: String) {
+        updateState {
+            copy(typedName = newName)
         }
     }
 
-    private suspend fun navigateBack() {
-        _sideEffect.send(NameListSideEffect.NavigateBack)
-    }
-
-    private suspend fun updateTypedName(newName: String) {
-        _uiState.value = _uiState.value.copy(typedName = newName)
-    }
-
     private suspend fun addName() {
-        _uiState.value = _uiState.value.copy(isLoading = true)
-        delay(1.seconds)
+        val name = currentState.typedName
+        if (name.isBlank()) return
+
+        updateState {
+            copy(isLoading = true, typedName = "")
+        }
+
+        delay(1.seconds) // Simulate network request
+
         val newList = arrayListOf<String>()
-        newList.addAll(_uiState.value.names)
-        newList.add(_uiState.value.typedName)
-        _uiState.value = _uiState.value.copy(
-            names = newList,
-            typedName = "",
-            isLoading = false
-        )
+        newList.addAll(currentState.names)
+        newList.add(name)
+
+        updateState {
+            copy(
+                names = newList,
+                isLoading = false
+            )
+        }
     }
 }
