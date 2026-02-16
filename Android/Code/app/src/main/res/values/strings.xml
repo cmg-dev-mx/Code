@@ -9,4 +9,6 @@
     <string name="ejemplo_crash">Ejemplo de Crash</string>
     <string name="provocar_crash">Provocar Crash</string>
     <string name="persistencia_datos">Persistencia de Datos</string>
+    <string name="notas">Notas</string>
+    <string name="agregar_nota">Agregar nota</string>
 </resources>

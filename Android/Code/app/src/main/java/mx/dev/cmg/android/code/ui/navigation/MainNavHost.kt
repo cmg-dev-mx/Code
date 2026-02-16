@@ -13,16 +13,24 @@ import kotlinx.serialization.Serializable
 import mx.dev.cmg.android.code.ui.feature.crash.layout.CrashScreen
 import mx.dev.cmg.android.code.ui.feature.crash.viewmodel.CrashSideEffect
 import mx.dev.cmg.android.code.ui.feature.datapersistence.layout.DataPersistenceScreen
+import mx.dev.cmg.android.code.ui.feature.datapersistence.layout.NoteDetailScreen
 import mx.dev.cmg.android.code.ui.feature.datapersistence.viewmodel.DataPersistenceSideEffect
+import mx.dev.cmg.android.code.ui.feature.datapersistence.viewmodel.NoteDetailSideEffect
 import mx.dev.cmg.android.code.ui.feature.main.layout.MainScreen
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainSideEffect
 import mx.dev.cmg.android.code.ui.feature.mvidemo.layout.NameListScreen
 import mx.dev.cmg.android.code.ui.feature.mvidemo.viewmodel.NameListSideEffect
 
-@Serializable data object Main : NavKey
-@Serializable data object NameList : NavKey
-@Serializable data object Crashlytics : NavKey
-@Serializable data object DataPersistence : NavKey
+@Serializable
+data object Main : NavKey
+@Serializable
+data object NameList : NavKey
+@Serializable
+data object Crashlytics : NavKey
+@Serializable
+data object DataPersistence : NavKey
+@Serializable
+data class NoteDetail(val id: Int) : NavKey
 
 @Composable
 fun MainNavHost(modifier: Modifier = Modifier) {
@@ -43,8 +51,10 @@ fun MainNavHost(modifier: Modifier = Modifier) {
                         when (sideEffect) {
                             MainSideEffect.NavigateToNameList ->
                                 backStack.navigateTo(NameList)
+
                             MainSideEffect.NavigateToCrashlytics ->
                                 backStack.navigateTo(Crashlytics)
+
                             MainSideEffect.NavigateToPersistence ->
                                 backStack.navigateTo(DataPersistence)
                         }
@@ -81,8 +91,22 @@ fun MainNavHost(modifier: Modifier = Modifier) {
                     modifier = Modifier.fillMaxSize(),
                     onNavigation = { sideEffect ->
                         when (sideEffect) {
-                            DataPersistenceSideEffect.NavigateBack ->
-                                backStack.navigateBack()
+                            is DataPersistenceSideEffect.NavigateBack -> backStack.navigateBack()
+                            is DataPersistenceSideEffect.NoteDetail -> backStack.navigateTo(
+                                NoteDetail(sideEffect.id)
+                            )
+                        }
+                    }
+                )
+            }
+
+            entry<NoteDetail> { entry ->
+                NoteDetailScreen(
+                    modifier = Modifier.fillMaxSize(),
+                    noteId = entry.id,
+                    onNavigation = { sideEffect ->
+                        when (sideEffect) {
+                            NoteDetailSideEffect.NavigateBack -> backStack.navigateBack()
                         }
                     }
                 )

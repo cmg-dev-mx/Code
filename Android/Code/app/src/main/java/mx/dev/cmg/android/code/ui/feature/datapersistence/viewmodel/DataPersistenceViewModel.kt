@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import mx.dev.cmg.android.code.ui.base.viewmodel.launchEvent
 import mx.dev.cmg.android.code.ui.base.viewmodel.sendEffect
-import mx.dev.cmg.android.code.ui.base.viewmodel.update
 
 class DataPersistenceViewModel : ViewModel() {
 
@@ -21,12 +20,7 @@ class DataPersistenceViewModel : ViewModel() {
     fun onEvent(event: DataPersistenceEvent) = launchEvent {
         when (event) {
             is DataPersistenceEvent.NavigateBack -> _sideEffect.sendEffect(DataPersistenceSideEffect.NavigateBack)
-        }
-    }
-
-    private fun updateState() {
-        _uiState.update {
-            copy(isLoading = true)
+            is DataPersistenceEvent.CreateNote -> _sideEffect.sendEffect(DataPersistenceSideEffect.NoteDetail(id = 0))
         }
     }
 }
