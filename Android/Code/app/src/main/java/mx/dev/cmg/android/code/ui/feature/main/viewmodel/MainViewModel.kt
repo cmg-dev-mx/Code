@@ -32,6 +32,7 @@ class MainViewModel(
         when (event) {
             is MainEvent.NavigateToNameList -> _sideEffect.sendEffect(MainSideEffect.NavigateToNameList)
             is MainEvent.NavigateToCrashlytics -> _sideEffect.sendEffect(MainSideEffect.NavigateToCrashlytics)
+            is MainEvent.NavigateToPersistence -> _sideEffect.sendEffect(MainSideEffect.NavigateToPersistence)
         }
     }
 

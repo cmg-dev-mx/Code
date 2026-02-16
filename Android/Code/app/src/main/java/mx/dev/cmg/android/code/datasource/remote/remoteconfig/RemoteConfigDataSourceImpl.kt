@@ -29,7 +29,8 @@ class RemoteConfigDataSourceImpl : RemoteConfigDataSource {
         remoteConfig.setDefaultsAsync(
             mapOf(
                 "mvi" to false,
-                "crash" to false
+                "crash" to false,
+                "persistence" to false
             )
         )
         remoteConfig.setConfigSettingsAsync(configSettings)

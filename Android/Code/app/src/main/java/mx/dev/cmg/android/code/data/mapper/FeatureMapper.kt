@@ -8,6 +8,7 @@ object FeatureMapper {
         return when (this) {
             "mvi" -> Feature.MVI
             "crash" -> Feature.CRASHLYTICS
+            "persistence" -> Feature.PERSISTENCE
             else -> null
         }
     }

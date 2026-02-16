@@ -12,7 +12,11 @@ class FeatureRepositoryImpl(
 
     override fun getAvailableFeatures(): Flow<List<Feature>> = flow {
         val availableFeatures = buildList {
-            listOf("mvi", "crash").forEach { key ->
+            listOf(
+                "mvi",
+                "crash",
+                "persistence"
+            ).forEach { key ->
                 if (remoteConfigDataSource.getBoolean(key)) {
                     key.toFeature()?.let { feature -> add(feature) }
                 }
