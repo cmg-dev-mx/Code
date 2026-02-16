@@ -1,4 +1,4 @@
-package mx.dev.cmg.android.code.source.remoteconfig
+package mx.dev.cmg.android.code.datasource.remote.remoteconfig
 
 import com.google.firebase.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
@@ -10,7 +10,7 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withTimeoutOrNull
 import kotlin.time.Duration.Companion.seconds
 
-class RemoteConfigSourceImpl : RemoteConfigSource {
+class RemoteConfigDataSourceImpl : RemoteConfigDataSource {
 
     private val remoteConfig: FirebaseRemoteConfig by lazy { Firebase.remoteConfig }
     
@@ -35,6 +35,16 @@ class RemoteConfigSourceImpl : RemoteConfigSource {
         remoteConfig.setConfigSettingsAsync(configSettings)
     }
 
+    override suspend fun getBoolean(key: String): Boolean {
+        ensureFetchCompleted()
+
+        return try {
+            remoteConfig.getBoolean(key)
+        } catch (_: Exception) {
+            false
+        }
+    }
+
     private suspend fun ensureFetchCompleted(): Boolean {
         if (isFetchCompleted) return true
 
@@ -52,16 +62,6 @@ class RemoteConfigSourceImpl : RemoteConfigSource {
                 isFetchCompleted = true
                 false
             }
-        }
-    }
-
-    override suspend fun getBoolean(key: String): Boolean {
-        ensureFetchCompleted()
-        
-        return try {
-            remoteConfig.getBoolean(key)
-        } catch (_: Exception) {
-            false
         }
     }
 }
