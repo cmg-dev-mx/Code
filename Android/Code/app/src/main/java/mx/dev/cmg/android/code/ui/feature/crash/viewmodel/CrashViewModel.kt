@@ -1,13 +1,24 @@
 package mx.dev.cmg.android.code.ui.feature.crash.viewmodel
 
-import mx.dev.cmg.android.code.ui.base.viewmodel.MviViewModel
+import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
+import mx.dev.cmg.android.code.ui.base.viewmodel.launchEvent
+import mx.dev.cmg.android.code.ui.base.viewmodel.sendEffect
 
+class CrashViewModel : ViewModel() {
 
-class CrashViewModel : MviViewModel<Unit, CrashEvent, CrashSideEffect>(
-    initialState = Unit
-) {
-    override suspend fun handleEvent(event: CrashEvent) = when (event) {
-        is CrashEvent.OnCrashButtonClicked -> throw RuntimeException("¡Esto es un crash de ejemplo!")
-        is CrashEvent.NavigateBack -> emitSideEffect(CrashSideEffect.NavigateBack)
+    private val _sideEffect = Channel<CrashSideEffect>(Channel.BUFFERED)
+    val sideEffect = _sideEffect.receiveAsFlow()
+
+    fun onEvent(event: CrashEvent) = launchEvent {
+        when (event) {
+            is CrashEvent.OnCrashButtonClicked -> throwExampleError()
+            is CrashEvent.NavigateBack -> _sideEffect.sendEffect(CrashSideEffect.NavigateBack)
+        }
+    }
+
+    private fun throwExampleError(): Nothing {
+        throw RuntimeException("¡Esto es un crash de ejemplo!")
     }
 }
