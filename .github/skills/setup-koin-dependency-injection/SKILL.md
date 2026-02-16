@@ -21,16 +21,18 @@ Koin es un framework ligero de inyección de dependencias para Kotlin que utiliz
 En `gradle/libs.versions.toml`:
 ```toml
 [versions]
-koin = "4.1.1"
+koinBom = "4.1.1"
 
 [libraries]
-koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
-koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
+koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koinBom" }
+koin-android = { group = "io.insert-koin", name = "koin-android"}
+koin-compose = { group = "io.insert-koin", name = "koin-androidx-compose"}
 ```
 
 En `app/build.gradle.kts`:
 ```kotlin
 dependencies {
+    implementation(platform(libs.koin.bom))
     implementation(libs.koin.android)
     implementation(libs.koin.compose)
 }
@@ -48,8 +50,10 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
 
 class CodeApplication : Application() {
+    
     override fun onCreate() {
         super.onCreate()
+        
         startKoin {
             androidContext(this@CodeApplication)
             modules(appModule)
@@ -68,7 +72,11 @@ import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 val appModule = module {
-    viewModelOf(::MainViewModel)
+    // Interfaz e implementacion
+    // singleOf(::RepositoryImpl) { bind<Repository>() }
+
+    // ViewModel
+    // viewModelOf(::MainViewModel)
 }
 ```
 

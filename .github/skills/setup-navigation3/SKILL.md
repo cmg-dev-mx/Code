@@ -17,27 +17,7 @@ Navigation3 es la biblioteca oficial de Android para gestionar navegación en ap
 
 ## Pasos
 
-### 1. Añadir plugins en build.gradle.kts (raíz)
-
-```kotlin
-plugins {
-    alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.kotlin.compose) apply false
-    alias(libs.plugins.kotlin.serialization) apply false
-}
-```
-
-### 2. Añadir plugin en app/build.gradle.kts
-
-```kotlin
-plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlin.serialization)
-}
-```
-
-### 3. Configurar versiones en gradle/libs.versions.toml
+### 1. Configurar versiones en gradle/libs.versions.toml
 
 En `[versions]`:
 ```toml
@@ -57,10 +37,29 @@ En `[plugins]`:
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ```
 
+### 2. Añadir plugins en build.gradle.kts (raíz)
+
+```kotlin
+plugins {
+    // Otros plugins...
+    alias(libs.plugins.kotlin.serialization) apply false
+}
+```
+
+### 3. Añadir plugin en app/build.gradle.kts
+
+```kotlin
+plugins {
+    // Otros plugins...
+    alias(libs.plugins.kotlin.serialization)
+}
+```
+
 ### 4. Añadir dependencias en app/build.gradle.kts
 
 ```kotlin
 dependencies {
+    // Otras dependencias...
     implementation(libs.androidx.navigation3.runtime)
     implementation(libs.androidx.navigation3.ui)
     implementation(libs.androidx.navigation3.viewmodel)
@@ -83,8 +82,7 @@ import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import kotlinx.serialization.Serializable
 
-@Serializable
-data object Main: NavKey
+@Serializable data object Main: NavKey
 
 @Composable
 fun MainNavHost(modifier: Modifier = Modifier) {
