@@ -5,9 +5,13 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
+import mx.dev.cmg.android.code.core.model.Nota
+import mx.dev.cmg.android.code.repository.notes.NoteRepository
 import mx.dev.cmg.android.code.ui.base.viewmodel.launchEvent
 
-class NoteDetailViewModel : ViewModel() {
+class NoteDetailViewModel(
+    private val repository: NoteRepository
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(NoteDetailUiState())
     val uiState = _uiState.asStateFlow()
@@ -33,7 +37,15 @@ class NoteDetailViewModel : ViewModel() {
     }
 
     private suspend fun saveNote() {
-        // TODO
+        val nota = uiState.value.let {
+            Nota(
+                id = it.noteId,
+                title = it.title,
+                content = it.content
+            )
+        }
+        repository.saveNote(nota)
+
         _sideEffect.send(NoteDetailSideEffect.NavigateBack)
     }
 }

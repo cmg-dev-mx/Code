@@ -1,9 +1,13 @@
 package mx.dev.cmg.android.code.di
 
+import mx.dev.cmg.android.code.datasource.local.database.LocalDataSource
+import mx.dev.cmg.android.code.datasource.local.database.LocalDataSourceImpl
 import mx.dev.cmg.android.code.datasource.remote.remoteconfig.RemoteConfigDataSource
 import mx.dev.cmg.android.code.datasource.remote.remoteconfig.RemoteConfigDataSourceImpl
 import mx.dev.cmg.android.code.repository.feature.FeatureRepository
 import mx.dev.cmg.android.code.repository.feature.FeatureRepositoryImpl
+import mx.dev.cmg.android.code.repository.notes.NoteRepository
+import mx.dev.cmg.android.code.repository.notes.NoteRepositoryImpl
 import mx.dev.cmg.android.code.ui.feature.crash.viewmodel.CrashViewModel
 import mx.dev.cmg.android.code.ui.feature.datapersistence.viewmodel.DataPersistenceViewModel
 import mx.dev.cmg.android.code.ui.feature.datapersistence.viewmodel.NoteDetailViewModel
@@ -17,9 +21,11 @@ import org.koin.dsl.module
 val appModule = module {
     // Data Sources
     singleOf(::RemoteConfigDataSourceImpl) { bind<RemoteConfigDataSource>() }
+    singleOf(::LocalDataSourceImpl) { bind<LocalDataSource>() }
 
     // Repositories
     singleOf(::FeatureRepositoryImpl) { bind<FeatureRepository>() }
+    singleOf(::NoteRepositoryImpl) { bind<NoteRepository>() }
 
     // ViewModels
     viewModelOf(::MainViewModel)
