@@ -1,19 +1,22 @@
 package mx.dev.cmg.android.code.ui.navigation
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
+import androidx.navigation3.scene.DialogSceneStrategy
 import androidx.navigation3.ui.NavDisplay
 import kotlinx.serialization.Serializable
 import mx.dev.cmg.android.code.ui.feature.crash.layout.CrashScreen
 import mx.dev.cmg.android.code.ui.feature.crash.viewmodel.CrashSideEffect
 import mx.dev.cmg.android.code.ui.feature.datapersistence.layout.DataPersistenceScreen
-import mx.dev.cmg.android.code.ui.feature.datapersistence.layout.NoteDetailScreen
+import mx.dev.cmg.android.code.ui.feature.datapersistence.layout.NoteDetailDialog
 import mx.dev.cmg.android.code.ui.feature.datapersistence.viewmodel.DataPersistenceSideEffect
 import mx.dev.cmg.android.code.ui.feature.datapersistence.viewmodel.NoteDetailSideEffect
 import mx.dev.cmg.android.code.ui.feature.main.layout.MainScreen
@@ -35,6 +38,7 @@ data class NoteDetail(val id: Int) : NavKey
 @Composable
 fun MainNavHost(modifier: Modifier = Modifier) {
     val backStack = rememberNavBackStack(Main)
+    val dialogStrategy = remember { DialogSceneStrategy<NavKey>() }
 
     NavDisplay(
         modifier = modifier,
@@ -43,6 +47,7 @@ fun MainNavHost(modifier: Modifier = Modifier) {
             rememberViewModelStoreNavEntryDecorator()
         ),
         backStack = backStack,
+        sceneStrategy = dialogStrategy,
         entryProvider = entryProvider {
             entry<Main> {
                 MainScreen(
@@ -100,9 +105,11 @@ fun MainNavHost(modifier: Modifier = Modifier) {
                 )
             }
 
-            entry<NoteDetail> { entry ->
-                NoteDetailScreen(
-                    modifier = Modifier.fillMaxSize(),
+            entry<NoteDetail>(
+                metadata = DialogSceneStrategy.dialog()
+            ) { entry ->
+                NoteDetailDialog(
+                    modifier = Modifier.fillMaxWidth(),
                     noteId = entry.id,
                     onNavigation = { sideEffect ->
                         when (sideEffect) {
