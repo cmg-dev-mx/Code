@@ -11,4 +11,8 @@
     <string name="persistencia_datos">Persistencia de Datos</string>
     <string name="notas">Notas</string>
     <string name="agregar_nota">Agregar nota</string>
+    <string name="titulo">Título</string>
+    <string name="contenido">Contenido</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="guardar">Guardar</string>
 </resources>
