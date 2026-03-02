@@ -30,7 +30,8 @@ class RemoteConfigDataSourceImpl : RemoteConfigDataSource {
             mapOf(
                 "mvi" to false,
                 "crash" to false,
-                "persistence" to false
+                "persistence" to false,
+                "shared" to false
             )
         )
         remoteConfig.setConfigSettingsAsync(configSettings)
