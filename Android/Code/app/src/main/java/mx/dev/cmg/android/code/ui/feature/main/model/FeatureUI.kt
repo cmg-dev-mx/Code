@@ -25,6 +25,12 @@ enum class FeatureUI(
         displayName = R.string.persistencia_datos,
         icon = R.drawable.ic_database,
         onClickEvent = MainEvent.NavigateToPersistence
+    ),
+
+    SHARED_PREFERENCES(
+        displayName = R.string.shared_preferences,
+        icon = R.drawable.ic_preferences,
+        onClickEvent = MainEvent.NavigateToSharedPreferences
     );
 
     companion object {
@@ -33,6 +39,7 @@ enum class FeatureUI(
                 Feature.MVI -> MVI
                 Feature.CRASHLYTICS -> CRASHLYTICS
                 Feature.PERSISTENCE -> PERSISTENCE
+                Feature.SHARED -> SHARED_PREFERENCES
             }
         }
     }

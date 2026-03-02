@@ -4,4 +4,5 @@ sealed interface MainEvent {
     data object NavigateToNameList : MainEvent
     data object NavigateToCrashlytics : MainEvent
     data object NavigateToPersistence : MainEvent
+    data object NavigateToSharedPreferences : MainEvent
 }
