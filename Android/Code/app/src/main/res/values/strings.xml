@@ -16,4 +16,8 @@
     <string name="cancelar">Cancelar</string>
     <string name="guardar">Guardar</string>
     <string name="eliminar_nota">Eliminar nota</string>
+    <string name="shared_preferences">Shared Preferences</string>
+    <string name="enable_edition">Habilitar edición</string>
+    <string name="text_to_edit">Texto a guardar</string>
+    <string name="value_saved">Value saved successfully</string>
 </resources>

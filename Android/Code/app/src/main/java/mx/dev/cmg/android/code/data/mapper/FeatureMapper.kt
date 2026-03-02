@@ -9,6 +9,7 @@ object FeatureMapper {
             "mvi" -> Feature.MVI
             "crash" -> Feature.CRASHLYTICS
             "persistence" -> Feature.PERSISTENCE
+            "shared" -> Feature.SHARED
             else -> null
         }
     }
