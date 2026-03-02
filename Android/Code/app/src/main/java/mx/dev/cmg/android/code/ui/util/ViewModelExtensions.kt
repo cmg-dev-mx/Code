@@ -1,4 +1,4 @@
-package mx.dev.cmg.android.code.ui.base.viewmodel
+package mx.dev.cmg.android.code.ui.util
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

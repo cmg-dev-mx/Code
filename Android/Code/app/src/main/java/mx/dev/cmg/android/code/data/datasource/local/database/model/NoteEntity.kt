@@ -1,10 +1,10 @@
-package mx.dev.cmg.android.code.datasource.local.database.model
+package mx.dev.cmg.android.code.data.datasource.local.database.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class NotaEntity(
+data class NoteEntity(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val title: String,
     val content: String,

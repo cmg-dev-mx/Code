@@ -28,7 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import mx.dev.cmg.android.code.R
-import mx.dev.cmg.android.code.core.model.Nota
+import mx.dev.cmg.android.code.domain.Note
 import mx.dev.cmg.android.code.ui.atomicdesign.particle.Title
 import mx.dev.cmg.android.code.ui.feature.datapersistence.viewmodel.DataPersistenceEvent
 import mx.dev.cmg.android.code.ui.feature.datapersistence.viewmodel.DataPersistenceUiState
@@ -92,7 +92,7 @@ fun DataPersistenceLayout(
 @Composable
 fun NoteItem(
     modifier: Modifier = Modifier,
-    note: Nota,
+    note: Note,
     onClick: () -> Unit,
     onDelete: () -> Unit
 ) {
@@ -144,25 +144,25 @@ fun NoteItem(
 private fun DataPersistenceLayoutPreview() {
 
     val sampleNotes = listOf(
-        Nota(
+        Note(
             id = 1,
             title = "Nota 1",
             content = "Contenido de la nota 1",
             timestamp = System.currentTimeMillis()
         ),
-        Nota(
+        Note(
             id = 2,
             title = "Nota 2",
             content = "Contenido de la nota 2",
             timestamp = System.currentTimeMillis()
         ),
-        Nota(
+        Note(
             id = 3,
             title = "Nota 3",
             content = "Contenido de la nota 3",
             timestamp = System.currentTimeMillis()
         ),
-        Nota(
+        Note(
             id = 4,
             title = "Nota 4",
             content = "Contenido de la nota 4",

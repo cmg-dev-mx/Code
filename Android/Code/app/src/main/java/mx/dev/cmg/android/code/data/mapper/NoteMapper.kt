@@ -1,12 +1,12 @@
 package mx.dev.cmg.android.code.data.mapper
 
-import mx.dev.cmg.android.code.core.model.Nota
-import mx.dev.cmg.android.code.datasource.local.database.model.NotaEntity
+import mx.dev.cmg.android.code.data.datasource.local.database.model.NoteEntity
+import mx.dev.cmg.android.code.domain.Note
 
-object NotaMapper {
+object NoteMapper {
 
-    fun NotaEntity.toNota(): Nota {
-        return Nota(
+    fun NoteEntity.toNote(): Note {
+        return Note(
             id = this.id,
             title = this.title,
             content = this.content,
@@ -14,8 +14,8 @@ object NotaMapper {
         )
     }
 
-    fun Nota.toNotaEntity(): NotaEntity {
-        return NotaEntity(
+    fun Note.toNoteEntity(): NoteEntity {
+        return NoteEntity(
             id = this.id,
             title = this.title,
             content = this.content,

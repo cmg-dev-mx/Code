@@ -1,6 +1,6 @@
-package mx.dev.cmg.android.code.core.model
+package mx.dev.cmg.android.code.domain
 
-data class Nota(
+data class Note(
     val id: Int,
     val title: String,
     val content: String,

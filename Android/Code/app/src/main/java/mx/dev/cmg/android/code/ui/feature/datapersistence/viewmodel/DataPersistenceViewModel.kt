@@ -8,9 +8,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import mx.dev.cmg.android.code.repository.notes.NoteRepository
-import mx.dev.cmg.android.code.ui.base.viewmodel.launchEvent
-import mx.dev.cmg.android.code.ui.base.viewmodel.sendEffect
+import mx.dev.cmg.android.code.data.repository.notes.NoteRepository
+import mx.dev.cmg.android.code.ui.util.launchEvent
+import mx.dev.cmg.android.code.ui.util.sendEffect
 
 class DataPersistenceViewModel(
     private val noteRepository: NoteRepository

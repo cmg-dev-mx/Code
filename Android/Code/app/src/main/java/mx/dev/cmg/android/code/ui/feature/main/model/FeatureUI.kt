@@ -1,7 +1,7 @@
 package mx.dev.cmg.android.code.ui.feature.main.model
 
 import mx.dev.cmg.android.code.R
-import mx.dev.cmg.android.code.core.model.Feature
+import mx.dev.cmg.android.code.domain.Feature
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainEvent
 
 enum class FeatureUI(

@@ -1,7 +1,9 @@
 package mx.dev.cmg.android.code
 
 import android.app.Application
-import mx.dev.cmg.android.code.di.appModule
+import mx.dev.cmg.android.code.di.dataPersistenceModule
+import mx.dev.cmg.android.code.di.mainModule
+import mx.dev.cmg.android.code.di.remoteConfigModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
 
@@ -12,7 +14,11 @@ class CodeApplication : Application() {
 
         startKoin {
             androidContext(this@CodeApplication)
-            modules(appModule)
+            modules(
+                remoteConfigModule,
+                dataPersistenceModule,
+                mainModule
+            )
         }
     }
 }

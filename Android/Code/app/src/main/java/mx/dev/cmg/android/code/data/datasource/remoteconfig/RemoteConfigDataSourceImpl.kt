@@ -1,4 +1,4 @@
-package mx.dev.cmg.android.code.datasource.remote.remoteconfig
+package mx.dev.cmg.android.code.data.datasource.remoteconfig
 
 import com.google.firebase.Firebase
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig

@@ -5,9 +5,9 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
-import mx.dev.cmg.android.code.core.model.Nota
-import mx.dev.cmg.android.code.repository.notes.NoteRepository
-import mx.dev.cmg.android.code.ui.base.viewmodel.launchEvent
+import mx.dev.cmg.android.code.data.repository.notes.NoteRepository
+import mx.dev.cmg.android.code.domain.Note
+import mx.dev.cmg.android.code.ui.util.launchEvent
 
 class NoteDetailViewModel(
     private val repository: NoteRepository
@@ -52,7 +52,7 @@ class NoteDetailViewModel(
 
     private suspend fun saveNote() {
         val nota = uiState.value.let {
-            Nota(
+            Note(
                 id = it.noteId,
                 title = it.title,
                 content = it.content,
