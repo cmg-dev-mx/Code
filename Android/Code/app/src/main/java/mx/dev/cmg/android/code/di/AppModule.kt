@@ -1,7 +1,9 @@
 package mx.dev.cmg.android.code.di
 
-import mx.dev.cmg.android.code.datasource.local.database.LocalDataSource
-import mx.dev.cmg.android.code.datasource.local.database.LocalDataSourceImpl
+import androidx.room.Room
+import mx.dev.cmg.android.code.datasource.local.LocalDataSource
+import mx.dev.cmg.android.code.datasource.local.LocalDataSourceImpl
+import mx.dev.cmg.android.code.datasource.local.database.NoteDatabase
 import mx.dev.cmg.android.code.datasource.remote.remoteconfig.RemoteConfigDataSource
 import mx.dev.cmg.android.code.datasource.remote.remoteconfig.RemoteConfigDataSourceImpl
 import mx.dev.cmg.android.code.repository.feature.FeatureRepository
@@ -19,6 +21,19 @@ import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 val appModule = module {
+    // Database
+    single {
+        Room.databaseBuilder(
+            context = get(),
+            klass = NoteDatabase::class.java,
+            name = NoteDatabase.DATABASE_NAME
+        ).fallbackToDestructiveMigration(dropAllTables = true)
+            .build()
+    }
+
+    // DAO
+    single { get<NoteDatabase>().notaDao() }
+
     // Data Sources
     singleOf(::RemoteConfigDataSourceImpl) { bind<RemoteConfigDataSource>() }
     singleOf(::LocalDataSourceImpl) { bind<LocalDataSource>() }

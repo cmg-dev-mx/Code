@@ -22,13 +22,14 @@ class NoteDetailViewModel(
     fun onEvent(event: NoteDetailEvent) = launchEvent {
         when (event) {
             is NoteDetailEvent.NavigateBack -> _sideEffect.send(NoteDetailSideEffect.NavigateBack)
-            is NoteDetailEvent.UpdateTitle -> updatetitle(event.title)
+            is NoteDetailEvent.UpdateTitle -> updateTitle(event.title)
             is NoteDetailEvent.UpdateContent -> updateContent(event.content)
+            is NoteDetailEvent.LoadNote -> loadNote(event.id)
             is NoteDetailEvent.SaveNote -> saveNote()
         }
     }
 
-    private suspend fun updatetitle(title: String) {
+    private suspend fun updateTitle(title: String) {
         _uiState.emit(uiState.value.copy(title = title))
     }
 
@@ -36,15 +37,34 @@ class NoteDetailViewModel(
         _uiState.emit(uiState.value.copy(content = content))
     }
 
+    private suspend fun loadNote(id: Int) {
+        val note = repository.getNoteById(id)
+        note?.let {
+            _uiState.emit(
+                uiState.value.copy(
+                    noteId = it.id,
+                    title = it.title,
+                    content = it.content
+                )
+            )
+        }
+    }
+
     private suspend fun saveNote() {
         val nota = uiState.value.let {
             Nota(
                 id = it.noteId,
                 title = it.title,
-                content = it.content
+                content = it.content,
+                timestamp = System.currentTimeMillis()
             )
         }
-        repository.saveNote(nota)
+
+        if (nota.id == 0) {
+            repository.saveNote(nota)
+        } else {
+            repository.updateNote(nota)
+        }
 
         _sideEffect.send(NoteDetailSideEffect.NavigateBack)
     }

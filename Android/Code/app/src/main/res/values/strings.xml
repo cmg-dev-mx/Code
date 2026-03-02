@@ -15,4 +15,5 @@
     <string name="contenido">Contenido</string>
     <string name="cancelar">Cancelar</string>
     <string name="guardar">Guardar</string>
+    <string name="eliminar_nota">Eliminar nota</string>
 </resources>
