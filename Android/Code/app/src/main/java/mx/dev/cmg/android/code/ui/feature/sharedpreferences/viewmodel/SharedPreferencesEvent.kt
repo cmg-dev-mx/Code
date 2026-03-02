@@ -1,4 +1,4 @@
-package mx.dev.cmg.android.code.ui.feature.shared.viewmodel
+package mx.dev.cmg.android.code.ui.feature.sharedpreferences.viewmodel
 
 sealed interface SharedPreferencesEvent {
     data object NavigateBack : SharedPreferencesEvent

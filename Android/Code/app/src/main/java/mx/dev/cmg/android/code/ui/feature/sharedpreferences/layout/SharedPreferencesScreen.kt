@@ -1,4 +1,4 @@
-package mx.dev.cmg.android.code.ui.feature.shared.layout
+package mx.dev.cmg.android.code.ui.feature.sharedpreferences.layout
 
 import android.widget.Toast
 import androidx.compose.runtime.Composable
@@ -8,14 +8,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import mx.dev.cmg.android.code.R
-import mx.dev.cmg.android.code.ui.feature.shared.viewmodel.SharedPreferencesViewModel
-import mx.dev.cmg.android.code.ui.feature.shared.viewmodel.SharedSideEffect
+import mx.dev.cmg.android.code.ui.feature.sharedpreferences.viewmodel.SharedPreferencesSideEffect
+import mx.dev.cmg.android.code.ui.feature.sharedpreferences.viewmodel.SharedPreferencesViewModel
 import mx.dev.cmg.android.code.ui.util.collectAsEffect
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SharedPreferencesScreen(
-    onNavigation: (SharedSideEffect) -> Unit,
+    onNavigation: (SharedPreferencesSideEffect) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: SharedPreferencesViewModel = koinViewModel()
 ) {
@@ -26,7 +26,7 @@ fun SharedPreferencesScreen(
 
     viewModel.sideEffect.collectAsEffect { sideEffect ->
         when (sideEffect) {
-            is SharedSideEffect.SaveSuccess -> {
+            is SharedPreferencesSideEffect.SaveSuccess -> {
                 Toast.makeText(context, valueSavedMessage, Toast.LENGTH_SHORT)
                     .show()
             }

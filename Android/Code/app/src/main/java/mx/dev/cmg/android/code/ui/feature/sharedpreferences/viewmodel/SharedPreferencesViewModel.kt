@@ -1,4 +1,4 @@
-package mx.dev.cmg.android.code.ui.feature.shared.viewmodel
+package mx.dev.cmg.android.code.ui.feature.sharedpreferences.viewmodel
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.channels.Channel
@@ -11,12 +11,12 @@ import mx.dev.cmg.android.code.ui.util.sendEffect
 
 class SharedPreferencesViewModel(
     private val repository: SharedPreferencesRepository
-): ViewModel() {
+) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(SharedUiState())
+    private val _uiState = MutableStateFlow(SharedPreferencesUiState())
     val uiState = _uiState.asStateFlow()
 
-    private val _sideEffect = Channel<SharedSideEffect>(capacity = Channel.BUFFERED)
+    private val _sideEffect = Channel<SharedPreferencesSideEffect>(capacity = Channel.BUFFERED)
     val sideEffect = _sideEffect.receiveAsFlow()
 
     init {
@@ -25,11 +25,10 @@ class SharedPreferencesViewModel(
 
     fun onEvent(event: SharedPreferencesEvent) = launchEvent {
         when (event) {
-            is SharedPreferencesEvent.NavigateBack -> _sideEffect.sendEffect(SharedSideEffect.NavigateBack)
+            is SharedPreferencesEvent.NavigateBack -> _sideEffect.sendEffect(SharedPreferencesSideEffect.NavigateBack)
             is SharedPreferencesEvent.ToggleEdit -> updateToggle(event.enabled)
             is SharedPreferencesEvent.OnValueChange -> updateText(event.value)
             is SharedPreferencesEvent.SaveValue -> saveValue()
-
         }
     }
 
@@ -37,7 +36,7 @@ class SharedPreferencesViewModel(
         val value = repository.getValue()
         val editEnabled = repository.isEditEnabled()
 
-        _uiState.value = SharedUiState(
+        _uiState.value = SharedPreferencesUiState(
             modifiedValue = value,
             editEnabled = editEnabled
         )
@@ -54,6 +53,6 @@ class SharedPreferencesViewModel(
 
     private suspend fun saveValue() {
         repository.updateValue(_uiState.value.modifiedValue)
-        _sideEffect.sendEffect(SharedSideEffect.SaveSuccess)
+        _sideEffect.sendEffect(SharedPreferencesSideEffect.SaveSuccess)
     }
 }

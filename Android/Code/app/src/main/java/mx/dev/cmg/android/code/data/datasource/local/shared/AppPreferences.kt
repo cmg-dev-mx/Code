@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
 
-class CustomSharedPreferences(context: Context) {
+class AppPreferences(context: Context) {
 
     companion object {
         private const val PREFS_NAME = "code_shared_prefs"
@@ -29,6 +29,3 @@ class CustomSharedPreferences(context: Context) {
         prefs.edit { putBoolean(key, value) }
     }
 }
-
-
-

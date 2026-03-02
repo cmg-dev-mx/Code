@@ -1,4 +1,4 @@
-package mx.dev.cmg.android.code.ui.feature.shared.layout
+package mx.dev.cmg.android.code.ui.feature.sharedpreferences.layout
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -22,12 +22,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import mx.dev.cmg.android.code.R
 import mx.dev.cmg.android.code.ui.atomicdesign.particle.Title
-import mx.dev.cmg.android.code.ui.feature.shared.viewmodel.SharedPreferencesEvent
-import mx.dev.cmg.android.code.ui.feature.shared.viewmodel.SharedUiState
+import mx.dev.cmg.android.code.ui.feature.sharedpreferences.viewmodel.SharedPreferencesEvent
+import mx.dev.cmg.android.code.ui.feature.sharedpreferences.viewmodel.SharedPreferencesUiState
 
 @Composable
 fun SharedPreferencesLayout(
-    uiState: SharedUiState,
+    uiState: SharedPreferencesUiState,
     onEvent: (SharedPreferencesEvent) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -90,7 +90,7 @@ fun SharedPreferencesLayout(
 private fun Preview() {
     SharedPreferencesLayout(
         modifier = Modifier.fillMaxSize(),
-        uiState = SharedUiState(),
+        uiState = SharedPreferencesUiState(),
         onEvent = {}
     )
 }

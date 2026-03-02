@@ -23,8 +23,8 @@ import mx.dev.cmg.android.code.ui.feature.main.layout.MainScreen
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainSideEffect
 import mx.dev.cmg.android.code.ui.feature.mvidemo.layout.NameListScreen
 import mx.dev.cmg.android.code.ui.feature.mvidemo.viewmodel.NameListSideEffect
-import mx.dev.cmg.android.code.ui.feature.shared.layout.SharedPreferencesScreen
-import mx.dev.cmg.android.code.ui.feature.shared.viewmodel.SharedSideEffect
+import mx.dev.cmg.android.code.ui.feature.sharedpreferences.layout.SharedPreferencesScreen
+import mx.dev.cmg.android.code.ui.feature.sharedpreferences.viewmodel.SharedPreferencesSideEffect
 
 @Serializable
 data object Main : NavKey
@@ -133,12 +133,12 @@ fun MainNavHost(modifier: Modifier = Modifier) {
 
             entry<SharedPreferences> {
                 SharedPreferencesScreen(
-                        onNavigation = { sideEffect ->
-                            when (sideEffect) {
-                                is SharedSideEffect.NavigateBack -> backStack.navigateBack()
-                                else -> {}
-                            }
-                        },
+                    onNavigation = { sideEffect ->
+                        when (sideEffect) {
+                            is SharedPreferencesSideEffect.NavigateBack -> backStack.navigateBack()
+                            else -> {}
+                        }
+                    },
                     modifier = Modifier.fillMaxSize()
                 )
             }

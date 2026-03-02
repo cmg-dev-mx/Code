@@ -1,23 +1,23 @@
 package mx.dev.cmg.android.code.data.datasource.local.shared
 
 class SharedPreferencesLocalSourceImpl(
-    private val customSharedPreferences: CustomSharedPreferences
+    private val appPreferences: AppPreferences
 ) : SharedPreferencesLocalSource {
 
     override suspend fun getValue(): String {
-        return customSharedPreferences.getString(KEY_VALUE_STRING)
+        return appPreferences.getString(KEY_VALUE_STRING)
     }
 
     override suspend fun isEditEnabled(): Boolean {
-        return customSharedPreferences.getBoolean(KEY_EDIT_ENABLED)
+        return appPreferences.getBoolean(KEY_EDIT_ENABLED)
     }
 
     override suspend fun updateEditEnabled(enabled: Boolean) {
-        customSharedPreferences.putBoolean(KEY_EDIT_ENABLED, enabled)
+        appPreferences.putBoolean(KEY_EDIT_ENABLED, enabled)
     }
 
     override suspend fun updateValue(newValue: String) {
-        customSharedPreferences.putString(KEY_VALUE_STRING, newValue)
+        appPreferences.putString(KEY_VALUE_STRING, newValue)
     }
 
     companion object {
