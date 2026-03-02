@@ -15,7 +15,8 @@ class FeatureRepositoryImpl(
             listOf(
                 "mvi",
                 "crash",
-                "persistence"
+                "persistence",
+                "shared"
             ).forEach { key ->
                 if (remoteConfigDataSource.getBoolean(key)) {
                     key.toFeature()?.let { feature -> add(feature) }

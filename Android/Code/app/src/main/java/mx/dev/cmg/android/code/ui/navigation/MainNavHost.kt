@@ -23,17 +23,25 @@ import mx.dev.cmg.android.code.ui.feature.main.layout.MainScreen
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainSideEffect
 import mx.dev.cmg.android.code.ui.feature.mvidemo.layout.NameListScreen
 import mx.dev.cmg.android.code.ui.feature.mvidemo.viewmodel.NameListSideEffect
+import mx.dev.cmg.android.code.ui.feature.shared.layout.SharedPreferencesScreen
 
 @Serializable
 data object Main : NavKey
+
 @Serializable
 data object NameList : NavKey
+
 @Serializable
 data object Crashlytics : NavKey
+
 @Serializable
 data object DataPersistence : NavKey
+
 @Serializable
 data class NoteDetail(val id: Int) : NavKey
+
+@Serializable
+data object SharedPreferences : NavKey
 
 @Composable
 fun MainNavHost(modifier: Modifier = Modifier) {
@@ -62,6 +70,9 @@ fun MainNavHost(modifier: Modifier = Modifier) {
 
                             MainSideEffect.NavigateToPersistence ->
                                 backStack.navigateTo(DataPersistence)
+
+                            MainSideEffect.NavigateToSharedPreferences ->
+                                backStack.navigateTo(SharedPreferences)
                         }
                     }
                 )
@@ -116,6 +127,12 @@ fun MainNavHost(modifier: Modifier = Modifier) {
                             NoteDetailSideEffect.NavigateBack -> backStack.navigateBack()
                         }
                     }
+                )
+            }
+
+            entry<SharedPreferences> {
+                SharedPreferencesScreen(
+                    modifier = Modifier.fillMaxSize()
                 )
             }
         }

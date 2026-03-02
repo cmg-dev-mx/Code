@@ -16,4 +16,5 @@
     <string name="cancelar">Cancelar</string>
     <string name="guardar">Guardar</string>
     <string name="eliminar_nota">Eliminar nota</string>
+    <string name="shared_preferences">Shared Preferences</string>
 </resources>
