@@ -3,8 +3,8 @@ package mx.dev.cmg.android.code.ui.feature.crash.viewmodel
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
-import mx.dev.cmg.android.code.ui.base.viewmodel.launchEvent
-import mx.dev.cmg.android.code.ui.base.viewmodel.sendEffect
+import mx.dev.cmg.android.code.ui.util.launchEvent
+import mx.dev.cmg.android.code.ui.util.sendEffect
 
 class CrashViewModel : ViewModel() {
 

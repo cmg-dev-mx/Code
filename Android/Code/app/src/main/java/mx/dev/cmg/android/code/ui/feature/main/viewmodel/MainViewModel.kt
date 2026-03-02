@@ -8,11 +8,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import mx.dev.cmg.android.code.repository.feature.FeatureRepository
-import mx.dev.cmg.android.code.ui.base.viewmodel.launchEvent
-import mx.dev.cmg.android.code.ui.base.viewmodel.sendEffect
-import mx.dev.cmg.android.code.ui.base.viewmodel.update
+import mx.dev.cmg.android.code.data.repository.feature.FeatureRepository
 import mx.dev.cmg.android.code.ui.feature.main.model.FeatureUI
+import mx.dev.cmg.android.code.ui.util.launchEvent
+import mx.dev.cmg.android.code.ui.util.sendEffect
+import mx.dev.cmg.android.code.ui.util.update
 
 class MainViewModel(
     private val repository: FeatureRepository
@@ -32,6 +32,7 @@ class MainViewModel(
         when (event) {
             is MainEvent.NavigateToNameList -> _sideEffect.sendEffect(MainSideEffect.NavigateToNameList)
             is MainEvent.NavigateToCrashlytics -> _sideEffect.sendEffect(MainSideEffect.NavigateToCrashlytics)
+            is MainEvent.NavigateToPersistence -> _sideEffect.sendEffect(MainSideEffect.NavigateToPersistence)
         }
     }
 

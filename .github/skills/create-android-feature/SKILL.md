@@ -137,12 +137,6 @@ class NombreFeatureViewModel : ViewModel() {
             is NombreFeatureEvent.NavigateBack -> _sideEffect.sendEffect(NombreFeatureSideEffect.NavigateBack)
         }
     }
-
-    private fun updateState() {
-        _uiState.update {
-            copy(isLoading = true)
-        }
-    }
 }
 ```
 
