@@ -1,7 +1,7 @@
-package mx.dev.cmg.android.code.repository.feature
+package mx.dev.cmg.android.code.data.repository.feature
 
 import kotlinx.coroutines.flow.Flow
-import mx.dev.cmg.android.code.core.model.Feature
+import mx.dev.cmg.android.code.domain.Feature
 
 interface FeatureRepository {
     fun getAvailableFeatures(): Flow<List<Feature>>

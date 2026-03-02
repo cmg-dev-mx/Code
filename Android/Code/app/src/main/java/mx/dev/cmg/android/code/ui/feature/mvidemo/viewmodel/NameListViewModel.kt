@@ -7,9 +7,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
-import mx.dev.cmg.android.code.ui.base.viewmodel.launchEvent
-import mx.dev.cmg.android.code.ui.base.viewmodel.sendEffect
-import mx.dev.cmg.android.code.ui.base.viewmodel.update
+import mx.dev.cmg.android.code.ui.util.launchEvent
+import mx.dev.cmg.android.code.ui.util.sendEffect
+import mx.dev.cmg.android.code.ui.util.update
 import kotlin.time.Duration.Companion.seconds
 
 class NameListViewModel : ViewModel() {
