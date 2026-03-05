@@ -24,6 +24,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.toPersistentList
 import mx.dev.cmg.android.code.R
 import mx.dev.cmg.android.code.ui.atomicdesign.particle.Title
 import mx.dev.cmg.android.code.ui.feature.main.model.FeatureUI
@@ -104,7 +105,7 @@ private fun Preview() {
             isLoading = false,
             availableFeatures = listOf(
                 FeatureUI.MVI
-            )
+            ).toPersistentList()
         ),
         onEvent = {},
         modifier = Modifier.fillMaxSize()

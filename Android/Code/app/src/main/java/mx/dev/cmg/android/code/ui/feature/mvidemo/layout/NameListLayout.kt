@@ -26,6 +26,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.toPersistentList
 import mx.dev.cmg.android.code.R
 import mx.dev.cmg.android.code.ui.atomicdesign.particle.Title
 import mx.dev.cmg.android.code.ui.feature.mvidemo.viewmodel.NameListEvent
@@ -81,7 +83,7 @@ fun NameListLayout(
 
 @Composable
 private fun NameList(
-    names: List<String>,
+    names: PersistentList<String>,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -157,7 +159,7 @@ private fun Preview() {
     NameListLayout(
         modifier = Modifier.fillMaxSize(),
         uiState = NameListUiState(
-            names = listOf("Carlos", "María", "José"),
+            names = listOf("Carlos", "María", "José").toPersistentList(),
             typedName = "Jesús"
         ),
         onEvent = {}

@@ -2,6 +2,7 @@ package mx.dev.cmg.android.code.ui.feature.main.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -43,7 +44,7 @@ class MainViewModel(
                 copy(isLoading = true)
             }
             repository.getAvailableFeatures().collect { features ->
-                val featuresUI = features.map { FeatureUI.from(it) }
+                val featuresUI = features.map { FeatureUI.from(it) }.toPersistentList()
 
                 _uiState.update {
                     copy(availableFeatures = featuresUI)
