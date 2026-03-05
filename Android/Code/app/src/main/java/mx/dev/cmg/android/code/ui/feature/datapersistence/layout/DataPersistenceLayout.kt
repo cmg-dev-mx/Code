@@ -27,6 +27,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.toPersistentList
 import mx.dev.cmg.android.code.R
 import mx.dev.cmg.android.code.domain.Note
 import mx.dev.cmg.android.code.ui.atomicdesign.particle.Title
@@ -173,7 +174,7 @@ private fun DataPersistenceLayoutPreview() {
     DataPersistenceLayout(
         modifier = Modifier.fillMaxSize(),
         uiState = DataPersistenceUiState(
-            notes = sampleNotes
+            notes = sampleNotes.toPersistentList()
         ),
         onEvent = {}
     )
