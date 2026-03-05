@@ -1,31 +1,36 @@
 package mx.dev.cmg.android.code.data.datasource.local.shared
 
-import android.content.Context
-import android.content.SharedPreferences
-import androidx.core.content.edit
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 
-class AppPreferences(context: Context) {
+class AppPreferences(private val dataStore: DataStore<Preferences>) {
 
     companion object {
-        private const val PREFS_NAME = "code_shared_prefs"
+        const val DATA_STORE_NAME = "code_prefs"
     }
 
-    private val prefs: SharedPreferences =
-        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-
-    fun getString(key: String, defaultValue: String = ""): String {
-        return prefs.getString(key, defaultValue) ?: defaultValue
+    suspend fun getString(key: String, defaultValue: String = ""): String {
+        val prefKey = stringPreferencesKey(key)
+        return dataStore.data.map { it[prefKey] ?: defaultValue }.first()
     }
 
-    fun putString(key: String, value: String) {
-        prefs.edit { putString(key, value) }
+    suspend fun putString(key: String, value: String) {
+        val prefKey = stringPreferencesKey(key)
+        dataStore.edit { it[prefKey] = value }
     }
 
-    fun getBoolean(key: String, defaultValue: Boolean = false): Boolean {
-        return prefs.getBoolean(key, defaultValue)
+    suspend fun getBoolean(key: String, defaultValue: Boolean = false): Boolean {
+        val prefKey = booleanPreferencesKey(key)
+        return dataStore.data.map { it[prefKey] ?: defaultValue }.first()
     }
 
-    fun putBoolean(key: String, value: Boolean) {
-        prefs.edit { putBoolean(key, value) }
+    suspend fun putBoolean(key: String, value: Boolean) {
+        val prefKey = booleanPreferencesKey(key)
+        dataStore.edit { it[prefKey] = value }
     }
 }
