@@ -1,6 +1,7 @@
 package mx.dev.cmg.android.code.ui.feature.mvidemo.viewmodel
 
 import androidx.lifecycle.ViewModel
+import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -44,9 +45,7 @@ class NameListViewModel : ViewModel() {
 
         delay(1.seconds)
 
-        val newList = arrayListOf<String>()
-        newList.addAll(_uiState.value.names)
-        newList.add(name)
+        val newList = (_uiState.value.names + name).toPersistentList()
 
         _uiState.update {
             copy(

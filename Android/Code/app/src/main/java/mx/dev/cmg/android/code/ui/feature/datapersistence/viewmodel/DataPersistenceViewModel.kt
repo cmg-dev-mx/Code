@@ -2,6 +2,7 @@ package mx.dev.cmg.android.code.ui.feature.datapersistence.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -38,7 +39,7 @@ class DataPersistenceViewModel(
     private fun loadNotes() {
         viewModelScope.launch {
             noteRepository.getNotes().collect { notes ->
-                _uiState.value = DataPersistenceUiState(notes = notes)
+                _uiState.value = DataPersistenceUiState(notes = notes.toPersistentList())
             }
         }
     }
