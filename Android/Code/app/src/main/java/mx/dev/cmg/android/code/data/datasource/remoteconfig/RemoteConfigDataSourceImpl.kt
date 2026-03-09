@@ -8,6 +8,7 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withTimeoutOrNull
+import mx.dev.cmg.android.code.domain.Feature
 import kotlin.time.Duration.Companion.seconds
 
 class RemoteConfigDataSourceImpl : RemoteConfigDataSource {
@@ -27,12 +28,7 @@ class RemoteConfigDataSourceImpl : RemoteConfigDataSource {
 
     init {
         remoteConfig.setDefaultsAsync(
-            mapOf(
-                "mvi" to false,
-                "crash" to false,
-                "persistence" to false,
-                "shared" to false
-            )
+            Feature.entries.associate { it.key to false }
         )
         remoteConfig.setConfigSettingsAsync(configSettings)
     }

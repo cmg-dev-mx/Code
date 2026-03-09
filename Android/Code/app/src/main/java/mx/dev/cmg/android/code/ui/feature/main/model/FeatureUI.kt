@@ -31,6 +31,12 @@ enum class FeatureUI(
         displayName = R.string.shared_preferences,
         icon = R.drawable.ic_preferences,
         onClickEvent = MainEvent.NavigateToSharedPreferences
+    ),
+
+    REST_API(
+        displayName = R.string.rest_api,
+        icon = R.drawable.ic_api,
+        onClickEvent = MainEvent.NavigateToRestApi
     );
 
     companion object {
@@ -40,6 +46,7 @@ enum class FeatureUI(
                 Feature.CRASHLYTICS -> CRASHLYTICS
                 Feature.PERSISTENCE -> PERSISTENCE
                 Feature.SHARED -> SHARED_PREFERENCES
+                Feature.REST -> REST_API
             }
         }
     }
