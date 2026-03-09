@@ -2,16 +2,17 @@ package mx.dev.cmg.android.code.ui.feature.rest.viewmodel
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
+import mx.dev.cmg.android.code.data.repository.shared.api.RestRepository
 import mx.dev.cmg.android.code.ui.util.launchEvent
 import mx.dev.cmg.android.code.ui.util.sendEffect
 import mx.dev.cmg.android.code.ui.util.update
-import kotlin.time.Duration.Companion.seconds
 
-class RestViewModel : ViewModel() {
+class RestViewModel(
+    private val repository: RestRepository
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(RestUiState())
     val uiState = _uiState.asStateFlow()
@@ -30,13 +31,16 @@ class RestViewModel : ViewModel() {
         _uiState.update {
             copy(isLoading = true)
         }
-        delay(2.seconds)
-        _uiState.update {
-            copy(
-                isLoading = false,
-                apiResponse = "This is a quote from the API",
-            )
+
+        repository.getQuote().onSuccess {
+            _uiState.update {
+                copy(isLoading = false, apiResponse = it)
+            }
+        }.onFailure {
+            _uiState.update {
+                copy(isLoading = false)
+            }
+            _sideEffect.sendEffect(RestSideEffect.ShowToast(it.message?:"Error fetching data"))
         }
-        _sideEffect.sendEffect(RestSideEffect.ShowToast("Data fetched successfully"))
     }
 }
