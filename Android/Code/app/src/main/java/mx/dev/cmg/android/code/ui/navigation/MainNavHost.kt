@@ -23,7 +23,8 @@ import mx.dev.cmg.android.code.ui.feature.main.layout.MainScreen
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainSideEffect
 import mx.dev.cmg.android.code.ui.feature.mvidemo.layout.NameListScreen
 import mx.dev.cmg.android.code.ui.feature.mvidemo.viewmodel.NameListSideEffect
-import mx.dev.cmg.android.code.ui.feature.rest.layout.RestLayout
+import mx.dev.cmg.android.code.ui.feature.rest.layout.RestScreen
+import mx.dev.cmg.android.code.ui.feature.rest.viewmodel.RestSideEffect
 import mx.dev.cmg.android.code.ui.feature.sharedpreferences.layout.SharedPreferencesScreen
 import mx.dev.cmg.android.code.ui.feature.sharedpreferences.viewmodel.SharedPreferencesSideEffect
 
@@ -151,7 +152,14 @@ fun MainNavHost(modifier: Modifier = Modifier) {
             }
 
             entry<RestApi> {
-                RestLayout(
+                RestScreen(
+                    onNavigation = { sideEffect ->
+                        when (sideEffect) {
+                            is RestSideEffect.NavigateBack -> backStack.navigateBack()
+                            else -> {}
+                        }
+
+                    },
                     modifier = Modifier.fillMaxSize()
                 )
             }
