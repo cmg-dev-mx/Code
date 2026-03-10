@@ -1,4 +1,4 @@
-package mx.dev.cmg.android.code.data.datasource.api
+package mx.dev.cmg.android.code.data.datasource.api.retrofit.model
 
 import com.squareup.moshi.JsonClass
 

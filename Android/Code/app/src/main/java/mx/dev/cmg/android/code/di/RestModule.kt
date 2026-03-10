@@ -2,8 +2,8 @@ package mx.dev.cmg.android.code.di
 
 import mx.dev.cmg.android.code.data.datasource.api.ApiDataSource
 import mx.dev.cmg.android.code.data.datasource.api.ApiDataSourceImpl
-import mx.dev.cmg.android.code.data.datasource.api.ApiService
-import mx.dev.cmg.android.code.data.datasource.api.RetrofitClient
+import mx.dev.cmg.android.code.data.datasource.api.retrofit.RetrofitClient
+import mx.dev.cmg.android.code.data.datasource.api.retrofit.service.ApiService
 import mx.dev.cmg.android.code.data.repository.api.RestRepository
 import mx.dev.cmg.android.code.data.repository.api.RestRepositoryImpl
 import mx.dev.cmg.android.code.ui.feature.rest.viewmodel.RestViewModel
