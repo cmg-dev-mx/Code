@@ -5,7 +5,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
-import mx.dev.cmg.android.code.data.repository.shared.api.RestRepository
+import mx.dev.cmg.android.code.data.repository.api.RestRepository
 import mx.dev.cmg.android.code.ui.util.launchEvent
 import mx.dev.cmg.android.code.ui.util.sendEffect
 import mx.dev.cmg.android.code.ui.util.update
