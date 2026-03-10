@@ -20,4 +20,7 @@
     <string name="enable_edition">Habilitar edición</string>
     <string name="text_to_edit">Texto a guardar</string>
     <string name="value_saved">Value saved successfully</string>
+    <string name="rest_api">Servicios Web</string>
+    <string name="obtener_respuesta">Obtener una respuesta</string>
+    <string name="presiona_para_obtener_respuesta">Presiona el botón para obtener una respuesta de la API y mostrarla aquí.</string>
 </resources>
