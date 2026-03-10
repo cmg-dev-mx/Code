@@ -23,6 +23,8 @@ import mx.dev.cmg.android.code.ui.feature.main.layout.MainScreen
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainSideEffect
 import mx.dev.cmg.android.code.ui.feature.mvidemo.layout.NameListScreen
 import mx.dev.cmg.android.code.ui.feature.mvidemo.viewmodel.NameListSideEffect
+import mx.dev.cmg.android.code.ui.feature.rest.layout.RestScreen
+import mx.dev.cmg.android.code.ui.feature.rest.viewmodel.RestSideEffect
 import mx.dev.cmg.android.code.ui.feature.sharedpreferences.layout.SharedPreferencesScreen
 import mx.dev.cmg.android.code.ui.feature.sharedpreferences.viewmodel.SharedPreferencesSideEffect
 
@@ -43,6 +45,9 @@ data class NoteDetail(val id: Int) : NavKey
 
 @Serializable
 data object SharedPreferences : NavKey
+
+@Serializable
+data object RestApi : NavKey
 
 @Composable
 fun MainNavHost(modifier: Modifier = Modifier) {
@@ -74,6 +79,9 @@ fun MainNavHost(modifier: Modifier = Modifier) {
 
                             MainSideEffect.NavigateToSharedPreferences ->
                                 backStack.navigateTo(SharedPreferences)
+
+                            MainSideEffect.NavigateToRestApi ->
+                                backStack.navigateTo(RestApi)
                         }
                     }
                 )
@@ -138,6 +146,19 @@ fun MainNavHost(modifier: Modifier = Modifier) {
                             is SharedPreferencesSideEffect.NavigateBack -> backStack.navigateBack()
                             else -> {}
                         }
+                    },
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+
+            entry<RestApi> {
+                RestScreen(
+                    onNavigation = { sideEffect ->
+                        when (sideEffect) {
+                            is RestSideEffect.NavigateBack -> backStack.navigateBack()
+                            else -> {}
+                        }
+
                     },
                     modifier = Modifier.fillMaxSize()
                 )

@@ -35,6 +35,7 @@ class MainViewModel(
             is MainEvent.NavigateToCrashlytics -> _sideEffect.sendEffect(MainSideEffect.NavigateToCrashlytics)
             is MainEvent.NavigateToPersistence -> _sideEffect.sendEffect(MainSideEffect.NavigateToPersistence)
             is MainEvent.NavigateToSharedPreferences -> _sideEffect.sendEffect(MainSideEffect.NavigateToSharedPreferences)
+            is MainEvent.NavigateToRestApi -> _sideEffect.sendEffect(MainSideEffect.NavigateToRestApi)
         }
     }
 

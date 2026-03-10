@@ -4,6 +4,7 @@ import android.app.Application
 import mx.dev.cmg.android.code.di.dataPersistenceModule
 import mx.dev.cmg.android.code.di.mainModule
 import mx.dev.cmg.android.code.di.remoteConfigModule
+import mx.dev.cmg.android.code.di.restModule
 import mx.dev.cmg.android.code.di.sharedPreferencesModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
@@ -19,7 +20,8 @@ class CodeApplication : Application() {
                 sharedPreferencesModule,
                 remoteConfigModule,
                 dataPersistenceModule,
-                mainModule
+                mainModule,
+                restModule
             )
         }
     }
