@@ -5,4 +5,5 @@ sealed interface MainSideEffect {
     data object NavigateToCrashlytics : MainSideEffect
     data object NavigateToPersistence: MainSideEffect
     data object NavigateToSharedPreferences: MainSideEffect
+    data object NavigateToRestApi: MainSideEffect
 }
