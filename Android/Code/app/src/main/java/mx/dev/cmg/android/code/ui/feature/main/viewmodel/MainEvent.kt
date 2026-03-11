@@ -6,4 +6,5 @@ sealed interface MainEvent {
     data object NavigateToPersistence : MainEvent
     data object NavigateToSharedPreferences : MainEvent
     data object NavigateToRestApi : MainEvent
+    data object NavigateToWebView : MainEvent
 }

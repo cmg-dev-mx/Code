@@ -27,6 +27,7 @@ import mx.dev.cmg.android.code.ui.feature.rest.layout.RestScreen
 import mx.dev.cmg.android.code.ui.feature.rest.viewmodel.RestSideEffect
 import mx.dev.cmg.android.code.ui.feature.sharedpreferences.layout.SharedPreferencesScreen
 import mx.dev.cmg.android.code.ui.feature.sharedpreferences.viewmodel.SharedPreferencesSideEffect
+import mx.dev.cmg.android.code.ui.feature.web.layout.WebLayout
 
 @Serializable
 data object Main : NavKey
@@ -48,6 +49,9 @@ data object SharedPreferences : NavKey
 
 @Serializable
 data object RestApi : NavKey
+
+@Serializable
+data object Web : NavKey
 
 @Composable
 fun MainNavHost(modifier: Modifier = Modifier) {
@@ -82,6 +86,9 @@ fun MainNavHost(modifier: Modifier = Modifier) {
 
                             MainSideEffect.NavigateToRestApi ->
                                 backStack.navigateTo(RestApi)
+
+                            MainSideEffect.NavigateToWebView ->
+                                backStack.navigateTo(Web)
                         }
                     }
                 )
@@ -160,6 +167,12 @@ fun MainNavHost(modifier: Modifier = Modifier) {
                         }
 
                     },
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+
+            entry<Web> {
+                WebLayout(
                     modifier = Modifier.fillMaxSize()
                 )
             }

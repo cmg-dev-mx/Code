@@ -23,4 +23,5 @@
     <string name="rest_api">Servicios Web</string>
     <string name="obtener_respuesta">Obtener una respuesta</string>
     <string name="presiona_para_obtener_respuesta">Presiona el botón para obtener una respuesta de la API y mostrarla aquí.</string>
+    <string name="web_view">Web View</string>
 </resources>
