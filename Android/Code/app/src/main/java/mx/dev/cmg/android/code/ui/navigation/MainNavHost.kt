@@ -27,7 +27,8 @@ import mx.dev.cmg.android.code.ui.feature.rest.layout.RestScreen
 import mx.dev.cmg.android.code.ui.feature.rest.viewmodel.RestSideEffect
 import mx.dev.cmg.android.code.ui.feature.sharedpreferences.layout.SharedPreferencesScreen
 import mx.dev.cmg.android.code.ui.feature.sharedpreferences.viewmodel.SharedPreferencesSideEffect
-import mx.dev.cmg.android.code.ui.feature.web.layout.WebLayout
+import mx.dev.cmg.android.code.ui.feature.web.layout.WebScreen
+import mx.dev.cmg.android.code.ui.feature.web.viewmodel.WebSideEffect
 
 @Serializable
 data object Main : NavKey
@@ -172,8 +173,14 @@ fun MainNavHost(modifier: Modifier = Modifier) {
             }
 
             entry<Web> {
-                WebLayout(
-                    modifier = Modifier.fillMaxSize()
+                WebScreen(
+                    modifier = Modifier.fillMaxSize(),
+                    onNavigation = { sideEffect ->
+                        when (sideEffect) {
+                            is WebSideEffect.NavigateBack -> backStack.navigateBack()
+                            else -> {}
+                        }
+                    }
                 )
             }
         }
