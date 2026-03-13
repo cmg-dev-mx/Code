@@ -6,4 +6,5 @@ sealed interface MainSideEffect {
     data object NavigateToPersistence: MainSideEffect
     data object NavigateToSharedPreferences: MainSideEffect
     data object NavigateToRestApi: MainSideEffect
+    data object NavigateToWebView: MainSideEffect
 }

@@ -5,5 +5,6 @@ enum class Feature(val key: String) {
     CRASHLYTICS("crash"),
     PERSISTENCE("persistence"),
     SHARED("shared"),
-    REST("rest")
+    REST("rest"),
+    WEB("web")
 }

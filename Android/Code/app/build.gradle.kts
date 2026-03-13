@@ -42,6 +42,7 @@ android {
     buildFeatures {
         compose = true
     }
+    ndkVersion = "29.0.14206865"
 }
 
 room {
@@ -77,6 +78,7 @@ dependencies {
     implementation(libs.moshi.core)
     ksp(libs.moshi.codegen)
     implementation(libs.logging)
+    implementation(libs.browser)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

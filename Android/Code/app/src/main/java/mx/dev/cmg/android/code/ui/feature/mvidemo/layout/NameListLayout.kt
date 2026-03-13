@@ -4,14 +4,16 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -86,17 +88,18 @@ private fun NameList(
     names: PersistentList<String>,
     modifier: Modifier = Modifier
 ) {
-    LazyColumn(
-        modifier = modifier,
+    FlowRow(
+        modifier = modifier.verticalScroll(rememberScrollState()),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        items(names) { name ->
+        names.forEach { name ->
             Text(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .wrapContentWidth()
                     .background(
                         color = MaterialTheme.colorScheme.surfaceVariant,
-                        shape = RoundedCornerShape(16.dp)
+                        shape = RoundedCornerShape(32.dp)
                     )
                     .padding(8.dp),
                 text = name,
@@ -159,7 +162,19 @@ private fun Preview() {
     NameListLayout(
         modifier = Modifier.fillMaxSize(),
         uiState = NameListUiState(
-            names = listOf("Carlos", "María", "José").toPersistentList(),
+            names = listOf(
+                "Carlos",
+                "María",
+                "José",
+                "Ana",
+                "Luis",
+                "Sofía",
+                "Miguel",
+                "Lucía",
+                "David",
+                "Isabella",
+                "Juan",
+                ).toPersistentList(),
             typedName = "Jesús"
         ),
         onEvent = {}

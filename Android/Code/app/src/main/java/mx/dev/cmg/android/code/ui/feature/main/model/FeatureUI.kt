@@ -37,6 +37,12 @@ enum class FeatureUI(
         displayName = R.string.rest_api,
         icon = R.drawable.ic_api,
         onClickEvent = MainEvent.NavigateToRestApi
+    ),
+
+    WEB_VIEW(
+        displayName = R.string.web_view,
+        icon = R.drawable.ic_web,
+        onClickEvent = MainEvent.NavigateToWebView
     );
 
     companion object {
@@ -47,6 +53,7 @@ enum class FeatureUI(
                 Feature.PERSISTENCE -> PERSISTENCE
                 Feature.SHARED -> SHARED_PREFERENCES
                 Feature.REST -> REST_API
+                Feature.WEB -> WEB_VIEW
             }
         }
     }
