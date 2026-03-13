@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
@@ -27,6 +28,11 @@ import mx.dev.cmg.android.code.ui.feature.rest.layout.RestScreen
 import mx.dev.cmg.android.code.ui.feature.rest.viewmodel.RestSideEffect
 import mx.dev.cmg.android.code.ui.feature.sharedpreferences.layout.SharedPreferencesScreen
 import mx.dev.cmg.android.code.ui.feature.sharedpreferences.viewmodel.SharedPreferencesSideEffect
+import mx.dev.cmg.android.code.ui.feature.web.layout.WebMenuScreen
+import mx.dev.cmg.android.code.ui.feature.web.layout.WebScreen
+import mx.dev.cmg.android.code.ui.feature.web.viewmodel.WebMenuSideEffect
+import mx.dev.cmg.android.code.ui.feature.web.viewmodel.WebSideEffect
+import mx.dev.cmg.android.code.ui.util.launchCustomTab
 
 @Serializable
 data object Main : NavKey
@@ -49,8 +55,17 @@ data object SharedPreferences : NavKey
 @Serializable
 data object RestApi : NavKey
 
+@Serializable
+data object Web : NavKey
+
+@Serializable
+data class InternalWeb(val url: String) : NavKey
+
 @Composable
 fun MainNavHost(modifier: Modifier = Modifier) {
+
+    val context = LocalContext.current
+
     val backStack = rememberNavBackStack(Main)
     val dialogStrategy = remember { DialogSceneStrategy<NavKey>() }
 
@@ -82,6 +97,9 @@ fun MainNavHost(modifier: Modifier = Modifier) {
 
                             MainSideEffect.NavigateToRestApi ->
                                 backStack.navigateTo(RestApi)
+
+                            MainSideEffect.NavigateToWebView ->
+                                backStack.navigateTo(Web)
                         }
                     }
                 )
@@ -161,6 +179,35 @@ fun MainNavHost(modifier: Modifier = Modifier) {
 
                     },
                     modifier = Modifier.fillMaxSize()
+                )
+            }
+
+            entry<Web> {
+                WebMenuScreen(
+                    modifier = Modifier.fillMaxSize(),
+                    onNavigation = { sideEffect ->
+                        when (sideEffect) {
+                            is WebMenuSideEffect.NavigateBack -> backStack.navigateBack()
+                            is WebMenuSideEffect.OpenWebInLayout -> backStack.navigateTo(
+                                InternalWeb(url = sideEffect.url)
+                            )
+                            is WebMenuSideEffect.OpenCustomTab -> {
+                                launchCustomTab(context = context, sideEffect.url)
+                            }
+                        }
+                    }
+                )
+            }
+
+            entry<InternalWeb> { entry ->
+                WebScreen(
+                    modifier = Modifier.fillMaxSize(),
+                    onNavigation = { sideEffect ->
+                        when (sideEffect) {
+                            is WebSideEffect.NavigateBack -> backStack.navigateBack()
+                        }
+                    },
+                    initialUrl = entry.url
                 )
             }
         }
