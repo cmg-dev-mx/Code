@@ -32,6 +32,7 @@ import mx.dev.cmg.android.code.ui.feature.web.layout.WebMenuScreen
 import mx.dev.cmg.android.code.ui.feature.web.layout.WebScreen
 import mx.dev.cmg.android.code.ui.feature.web.viewmodel.WebMenuSideEffect
 import mx.dev.cmg.android.code.ui.feature.web.viewmodel.WebSideEffect
+import mx.dev.cmg.android.code.ui.util.launchCustomTab
 
 @Serializable
 data object Main : NavKey

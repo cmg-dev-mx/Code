@@ -31,7 +31,7 @@ fun WebMenuLayout(
     ) {
         Title(
             modifier = Modifier.fillMaxWidth(),
-            title = "Web Menu",
+            title = stringResource(R.string.web_menu),
             icon = R.drawable.ic_arrow_back,
             onIconClick = { onEvent(WebMenuEvent.NavigateBack) }
         )

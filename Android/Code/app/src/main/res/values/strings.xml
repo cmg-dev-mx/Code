@@ -24,6 +24,7 @@
     <string name="obtener_respuesta">Obtener una respuesta</string>
     <string name="presiona_para_obtener_respuesta">Presiona el botón para obtener una respuesta de la API y mostrarla aquí.</string>
     <string name="web_view">Web View</string>
+    <string name="web_menu">Web Menu</string>
     <string name="open_web_in_layout">Open Web in Layout</string>
     <string name="open_web_in_custom_tab">Open Web in Custom Tab</string>
 </resources>
