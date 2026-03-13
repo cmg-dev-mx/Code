@@ -178,7 +178,6 @@ fun MainNavHost(modifier: Modifier = Modifier) {
                     onNavigation = { sideEffect ->
                         when (sideEffect) {
                             is WebSideEffect.NavigateBack -> backStack.navigateBack()
-                            else -> {}
                         }
                     }
                 )
