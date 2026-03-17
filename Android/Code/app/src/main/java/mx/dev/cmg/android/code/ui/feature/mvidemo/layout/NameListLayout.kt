@@ -14,12 +14,9 @@ import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,7 +28,10 @@ import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.toPersistentList
 import mx.dev.cmg.android.code.R
+import mx.dev.cmg.android.code.ui.atomicdesign.atom.CodeButton
+import mx.dev.cmg.android.code.ui.atomicdesign.atom.CodeTextField
 import mx.dev.cmg.android.code.ui.atomicdesign.particle.Title
+import mx.dev.cmg.android.code.ui.atomicdesign.subatomic.CodeCustomTheme
 import mx.dev.cmg.android.code.ui.feature.mvidemo.viewmodel.NameListEvent
 import mx.dev.cmg.android.code.ui.feature.mvidemo.viewmodel.NameListUiState
 
@@ -43,9 +43,9 @@ fun NameListLayout(
 ) {
     Column(
         modifier = modifier
-            .background(color = MaterialTheme.colorScheme.background)
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+            .background(color = CodeCustomTheme.Color.background)
+            .padding(CodeCustomTheme.Spacing.s),
+        verticalArrangement = Arrangement.spacedBy(CodeCustomTheme.Spacing.s)
     ) {
         Title(
             modifier = Modifier.fillMaxWidth(),
@@ -66,8 +66,8 @@ fun NameListLayout(
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = stringResource(R.string.no_hay_nombres),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f),
+                style = CodeCustomTheme.Typography.body,
+                color = CodeCustomTheme.Color.onBackground.copy(alpha = 0.5f),
                 textAlign = TextAlign.Center
             )
         }
@@ -90,20 +90,21 @@ private fun NameList(
 ) {
     FlowRow(
         modifier = modifier.verticalScroll(rememberScrollState()),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        horizontalArrangement = Arrangement.spacedBy(CodeCustomTheme.Spacing.xs),
+        verticalArrangement = Arrangement.spacedBy(CodeCustomTheme.Spacing.xs)
     ) {
         names.forEach { name ->
             Text(
                 modifier = Modifier
                     .wrapContentWidth()
                     .background(
-                        color = MaterialTheme.colorScheme.surfaceVariant,
-                        shape = RoundedCornerShape(32.dp)
+                        color = CodeCustomTheme.Color.secondary,
+                        shape = RoundedCornerShape(CodeCustomTheme.Shape.large)
                     )
-                    .padding(8.dp),
-                text = name,
-                style = MaterialTheme.typography.bodyLarge
+                    .padding(CodeCustomTheme.Spacing.xs),
+                color = CodeCustomTheme.Color.onSecondary,
+                style = CodeCustomTheme.Typography.body,
+                text = name
             )
         }
     }
@@ -119,35 +120,34 @@ private fun AddName(
 ) {
     Row(
         modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalArrangement = Arrangement.spacedBy(CodeCustomTheme.Spacing.xs),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        TextField(
+        CodeTextField(
             modifier = Modifier.weight(1f),
             label = {
                 Text(
-                    text = stringResource(R.string.escribe_nombre),
-                    style = MaterialTheme.typography.bodyMedium
+                    style = CodeCustomTheme.Typography.body,
+                    text = stringResource(R.string.escribe_nombre)
                 )
             },
             value = name,
             onValueChange = { onNameChange(it) }
         )
 
-        Button(
+        CodeButton(
             enabled = name.isNotEmpty(),
             onClick = { onClickAdd() }
         ) {
             if (isLoading) {
                 CircularProgressIndicator(
-                    modifier = Modifier.size(20.dp),
-                    color = MaterialTheme.colorScheme.onPrimary,
+                    modifier = Modifier.size(CodeCustomTheme.Icon.s),
+                    color = CodeCustomTheme.Color.onPrimary,
                     strokeWidth = 2.dp
                 )
             } else {
                 Icon(
-                    modifier = Modifier.size(20.dp),
-                    tint = MaterialTheme.colorScheme.onPrimary,
+                    modifier = Modifier.size(CodeCustomTheme.Icon.s),
                     painter = painterResource(R.drawable.ic_add),
                     contentDescription = null
                 )

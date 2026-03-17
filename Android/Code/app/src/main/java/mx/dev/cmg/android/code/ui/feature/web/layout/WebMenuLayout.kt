@@ -6,16 +6,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import mx.dev.cmg.android.code.R
+import mx.dev.cmg.android.code.ui.atomicdesign.atom.CodeButton
 import mx.dev.cmg.android.code.ui.atomicdesign.particle.Title
+import mx.dev.cmg.android.code.ui.atomicdesign.subatomic.CodeCustomTheme
 import mx.dev.cmg.android.code.ui.feature.web.viewmodel.WebMenuEvent
 
 @Composable
@@ -25,9 +24,9 @@ fun WebMenuLayout(
 ) {
     Column(
         modifier = modifier
-            .background(MaterialTheme.colorScheme.surface)
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+            .background(CodeCustomTheme.Color.background)
+            .padding(CodeCustomTheme.Spacing.s),
+        verticalArrangement = Arrangement.spacedBy(CodeCustomTheme.Spacing.s)
     ) {
         Title(
             modifier = Modifier.fillMaxWidth(),
@@ -36,20 +35,22 @@ fun WebMenuLayout(
             onIconClick = { onEvent(WebMenuEvent.NavigateBack) }
         )
 
-        Button(
+        CodeButton(
             modifier = Modifier.fillMaxWidth(),
             onClick = { onEvent(WebMenuEvent.OpenWebInLayout) }
         ) {
             Text(
+                style = CodeCustomTheme.Typography.body,
                 text = stringResource(R.string.open_web_in_layout)
             )
         }
 
-        Button(
+        CodeButton(
             modifier = Modifier.fillMaxWidth(),
             onClick = { onEvent(WebMenuEvent.OpenCustomTab) }
         ) {
             Text(
+                style = CodeCustomTheme.Typography.body,
                 text = stringResource(R.string.open_web_in_custom_tab)
             )
         }

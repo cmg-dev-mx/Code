@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,6 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import mx.dev.cmg.android.code.R
+import mx.dev.cmg.android.code.ui.atomicdesign.subatomic.CodeCustomTheme
 
 @Composable
 fun Title(
@@ -29,25 +29,25 @@ fun Title(
 ) {
     Row(
         modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(CodeCustomTheme.Spacing.s),
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(
-            modifier = Modifier.size(48.dp),
+            modifier = Modifier.size(CodeCustomTheme.Icon.l),
             onClick = { onIconClick?.invoke() },
             enabled = onIconClick != null
         ){
             Icon(
                 modifier = Modifier.fillMaxSize(),
-                tint = MaterialTheme.colorScheme.onBackground,
+                tint = CodeCustomTheme.Color.onBackground,
                 painter = painterResource(icon),
                 contentDescription = iconDescription
             )
         }
 
         Text(
-            style = MaterialTheme.typography.headlineMedium,
-            color = MaterialTheme.colorScheme.onBackground,
+            style = CodeCustomTheme.Typography.header,
+            color = CodeCustomTheme.Color.onBackground,
             text = title
         )
     }

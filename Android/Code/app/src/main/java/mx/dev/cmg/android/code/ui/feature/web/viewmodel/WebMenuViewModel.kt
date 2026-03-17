@@ -17,10 +17,10 @@ class WebMenuViewModel : ViewModel() {
         when (event) {
             is WebMenuEvent.NavigateBack -> _sideEffect.sendEffect(WebMenuSideEffect.NavigateBack)
             is WebMenuEvent.OpenWebInLayout -> _sideEffect.sendEffect(
-                WebMenuSideEffect.OpenWebInLayout(url.value)
+                WebMenuSideEffect.OpenWebInLayout(url)
             )
             is WebMenuEvent.OpenCustomTab -> _sideEffect.sendEffect(
-                WebMenuSideEffect.OpenCustomTab(url.value)
+                WebMenuSideEffect.OpenCustomTab(url)
             )
         }
     }

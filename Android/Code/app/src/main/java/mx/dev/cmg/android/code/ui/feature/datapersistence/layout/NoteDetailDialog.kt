@@ -1,12 +1,12 @@
 package mx.dev.cmg.android.code.ui.feature.datapersistence.layout
 
-import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import mx.dev.cmg.android.code.ui.atomicdesign.atom.CodeCard
 import mx.dev.cmg.android.code.ui.feature.datapersistence.viewmodel.NoteDetailEvent
 import mx.dev.cmg.android.code.ui.feature.datapersistence.viewmodel.NoteDetailSideEffect
 import mx.dev.cmg.android.code.ui.feature.datapersistence.viewmodel.NoteDetailViewModel
@@ -35,7 +35,7 @@ fun NoteDetailDialog(
     Dialog(
         onDismissRequest = { onNavigation(NoteDetailSideEffect.NavigateBack) },
     ) {
-        Card {
+        CodeCard {
             NoteDetailLayout(
                 modifier = modifier,
                 uiState = uiState,
