@@ -14,10 +14,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,11 +24,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.toPersistentList
 import mx.dev.cmg.android.code.R
 import mx.dev.cmg.android.code.domain.Note
+import mx.dev.cmg.android.code.ui.atomicdesign.atom.CodeCard
 import mx.dev.cmg.android.code.ui.atomicdesign.particle.Title
+import mx.dev.cmg.android.code.ui.atomicdesign.subatomic.CodeCustomTheme
 import mx.dev.cmg.android.code.ui.feature.datapersistence.viewmodel.DataPersistenceEvent
 import mx.dev.cmg.android.code.ui.feature.datapersistence.viewmodel.DataPersistenceUiState
 import mx.dev.cmg.android.code.ui.util.toFormattedDate
@@ -42,12 +41,13 @@ fun DataPersistenceLayout(
     modifier: Modifier = Modifier
 ) {
     Scaffold(
-        modifier = modifier
-            .background(color = MaterialTheme.colorScheme.background),
+        modifier = modifier,
+        containerColor = CodeCustomTheme.Color.background,
+        contentColor = CodeCustomTheme.Color.onBackground,
         topBar = {
             Title(
                 modifier = Modifier
-                    .padding(16.dp)
+                    .padding(CodeCustomTheme.Spacing.s)
                     .fillMaxWidth(),
                 title = stringResource(R.string.notas),
                 icon = R.drawable.ic_arrow_back,
@@ -58,14 +58,14 @@ fun DataPersistenceLayout(
             IconButton(
                 onClick = { onEvent(DataPersistenceEvent.CreateNote) },
                 modifier = Modifier.background(
-                    color = MaterialTheme.colorScheme.primary,
-                    shape = MaterialTheme.shapes.small
+                    color = CodeCustomTheme.Color.primary,
+                    shape = RoundedCornerShape(CodeCustomTheme.Shape.small)
                 )
             ) {
                 Icon(
                     painter = painterResource(R.drawable.ic_add),
                     contentDescription = stringResource(R.string.agregar_nota),
-                    tint = MaterialTheme.colorScheme.onPrimary
+                    tint = CodeCustomTheme.Color.onPrimary
                 )
             }
         }
@@ -74,9 +74,9 @@ fun DataPersistenceLayout(
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(vertical = 4.dp)
+                .padding(CodeCustomTheme.Spacing.s),
+            verticalArrangement = Arrangement.spacedBy(CodeCustomTheme.Spacing.s),
+            contentPadding = PaddingValues(vertical = CodeCustomTheme.Spacing.xxxs)
         ) {
             items(uiState.notes) { note ->
                 NoteItem(
@@ -97,18 +97,17 @@ fun NoteItem(
     onClick: () -> Unit,
     onDelete: () -> Unit
 ) {
-    Card(
+    CodeCard(
         modifier = modifier
-            .clip(RoundedCornerShape(8.dp))
+            .clip(RoundedCornerShape(CodeCustomTheme.Shape.large))
             .clickable { onClick() }
-            .background(color = MaterialTheme.colorScheme.surface),
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
-                .height(48.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                .padding(CodeCustomTheme.Spacing.s)
+                .height(CodeCustomTheme.Spacing.xxl),
+            horizontalArrangement = Arrangement.spacedBy(CodeCustomTheme.Spacing.xs),
         ) {
             Column(
                 modifier = Modifier
@@ -117,14 +116,12 @@ fun NoteItem(
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = note.title,
-                    style = MaterialTheme.typography.titleMedium,
-                    color = MaterialTheme.colorScheme.onSurface
+                    style = CodeCustomTheme.Typography.title,
+                    text = note.title
                 )
                 Text(
-                    text = note.timestamp.toFormattedDate(),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurface
+                    style = CodeCustomTheme.Typography.small,
+                    text = note.timestamp.toFormattedDate()
                 )
             }
             IconButton(
@@ -133,7 +130,7 @@ fun NoteItem(
                 Icon(
                     painter = painterResource(R.drawable.ic_delete),
                     contentDescription = stringResource(R.string.eliminar_nota),
-                    tint = MaterialTheme.colorScheme.error
+                    tint = CodeCustomTheme.Color.secondary
                 )
             }
         }

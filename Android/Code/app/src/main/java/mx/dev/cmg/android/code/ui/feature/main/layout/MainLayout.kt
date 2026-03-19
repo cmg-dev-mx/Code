@@ -14,7 +14,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,10 +22,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.toPersistentList
 import mx.dev.cmg.android.code.R
 import mx.dev.cmg.android.code.ui.atomicdesign.particle.Title
+import mx.dev.cmg.android.code.ui.atomicdesign.subatomic.CodeCustomTheme
 import mx.dev.cmg.android.code.ui.feature.main.model.FeatureUI
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainEvent
 import mx.dev.cmg.android.code.ui.feature.main.viewmodel.MainUiState
@@ -39,8 +38,9 @@ fun MainLayout(
 ) {
     Column(
         modifier = modifier
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+            .background(color = CodeCustomTheme.Color.background)
+            .padding(CodeCustomTheme.Spacing.s),
+        verticalArrangement = Arrangement.spacedBy(CodeCustomTheme.Spacing.s)
     ) {
         Title(
             modifier = Modifier.fillMaxWidth(),
@@ -52,7 +52,7 @@ fun MainLayout(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            verticalArrangement = Arrangement.spacedBy(CodeCustomTheme.Spacing.xs)
         ) {
             items(uiState.availableFeatures) { feature ->
                 MainItem(
@@ -75,22 +75,22 @@ private fun MainItem(
 ) {
     Row(
         modifier = modifier
-            .clip(shape = RoundedCornerShape(16.dp))
-            .background(color = MaterialTheme.colorScheme.surfaceVariant)
+            .clip(shape = RoundedCornerShape(CodeCustomTheme.Spacing.s))
+            .background(color = CodeCustomTheme.Color.surface)
             .clickable { onClick() }
-            .padding(16.dp),
+            .padding(CodeCustomTheme.Spacing.s),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            style = CodeCustomTheme.Typography.title,
+            color = CodeCustomTheme.Color.onSurface,
             text = title,
         )
 
         Icon(
-            modifier = Modifier.size(20.dp),
-            tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.size(CodeCustomTheme.Icon.s),
+            tint = CodeCustomTheme.Color.onSurface,
             painter = painterResource(icon),
             contentDescription = null
         )
