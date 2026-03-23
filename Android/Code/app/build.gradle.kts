@@ -68,6 +68,7 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.config)
     implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.ai)
     implementation(libs.room)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
