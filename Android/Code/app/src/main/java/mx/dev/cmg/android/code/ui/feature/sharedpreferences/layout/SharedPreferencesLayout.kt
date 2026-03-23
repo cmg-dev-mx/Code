@@ -8,20 +8,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import mx.dev.cmg.android.code.R
+import mx.dev.cmg.android.code.ui.atomicdesign.atom.CodeButton
+import mx.dev.cmg.android.code.ui.atomicdesign.atom.CodeSwitch
+import mx.dev.cmg.android.code.ui.atomicdesign.atom.CodeTextField
 import mx.dev.cmg.android.code.ui.atomicdesign.particle.Title
+import mx.dev.cmg.android.code.ui.atomicdesign.subatomic.CodeCustomTheme
 import mx.dev.cmg.android.code.ui.feature.sharedpreferences.viewmodel.SharedPreferencesEvent
 import mx.dev.cmg.android.code.ui.feature.sharedpreferences.viewmodel.SharedPreferencesUiState
 
@@ -33,8 +32,9 @@ fun SharedPreferencesLayout(
 ) {
     Column(
         modifier = modifier
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+            .background(color = CodeCustomTheme.Color.background)
+            .padding(CodeCustomTheme.Spacing.s),
+        verticalArrangement = Arrangement.spacedBy(CodeCustomTheme.Spacing.xs)
     ) {
         Title(
             modifier = Modifier.fillMaxWidth(),
@@ -46,41 +46,50 @@ fun SharedPreferencesLayout(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(8.dp))
-                .background(MaterialTheme.colorScheme.surfaceVariant)
-                .padding(16.dp),
+                .clip(RoundedCornerShape(CodeCustomTheme.Shape.medium))
+                .background(CodeCustomTheme.Color.surface)
+                .padding(CodeCustomTheme.Spacing.s),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                style = MaterialTheme.typography.titleMedium,
+                color = CodeCustomTheme.Color.onSurface,
+                style = CodeCustomTheme.Typography.title,
                 text = stringResource(R.string.enable_edition),
                 modifier = Modifier.weight(1f)
             )
 
-            Switch(
+            CodeSwitch(
                 checked = uiState.editEnabled,
                 onCheckedChange = { onEvent(SharedPreferencesEvent.ToggleEdit(it)) }
             )
         }
 
-        TextField(
+        CodeTextField(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 16.dp),
+                .padding(top = CodeCustomTheme.Spacing.s),
             value = uiState.modifiedValue,
             onValueChange = { onEvent(SharedPreferencesEvent.OnValueChange(it)) },
-            label = { Text(stringResource(R.string.text_to_edit)) },
+            label = {
+                Text(
+                    style = CodeCustomTheme.Typography.body,
+                    text = stringResource(R.string.text_to_edit)
+                )
+            },
             enabled = uiState.editEnabled
         )
 
-        Button(
+        CodeButton(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 16.dp),
+                .padding(top = CodeCustomTheme.Spacing.s),
             onClick = { onEvent(SharedPreferencesEvent.SaveValue) }
         ) {
-            Text(stringResource(R.string.guardar))
+            Text(
+                style = CodeCustomTheme.Typography.body,
+                text = stringResource(R.string.guardar)
+            )
         }
     }
 }

@@ -11,7 +11,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalInspectionMode
@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import mx.dev.cmg.android.code.R
 import mx.dev.cmg.android.code.ui.atomicdesign.particle.Title
+import mx.dev.cmg.android.code.ui.atomicdesign.subatomic.CodeCustomTheme
 import mx.dev.cmg.android.code.ui.feature.web.viewmodel.WebEvent
 import mx.dev.cmg.android.code.ui.feature.web.viewmodel.WebUiState
 
@@ -35,9 +36,9 @@ fun WebLayout(
 
     Column(
         modifier = modifier
-            .background(MaterialTheme.colorScheme.surface)
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+            .background(CodeCustomTheme.Color.background)
+            .padding(CodeCustomTheme.Spacing.s),
+        verticalArrangement = Arrangement.spacedBy(CodeCustomTheme.Spacing.xs)
     ) {
         Title(
             modifier = Modifier.fillMaxWidth(),
@@ -46,7 +47,6 @@ fun WebLayout(
             onIconClick = { onEvent(WebEvent.NavigateBack) }
         )
 
-
         if (isPreview) {
             Box(
                 modifier = Modifier
@@ -54,12 +54,12 @@ fun WebLayout(
                     .weight(1f)
                     .border(
                         width = 1.dp,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
-                        shape = MaterialTheme.shapes.small
+                        color = CodeCustomTheme.Color.secondary.copy(alpha = 0.5f),
+                        shape = RoundedCornerShape(CodeCustomTheme.Shape.medium)
                     )
                     .background(
-                        color = MaterialTheme.colorScheme.surfaceVariant,
-                        shape = MaterialTheme.shapes.small
+                        color = CodeCustomTheme.Color.secondary.copy(alpha = 0.1f),
+                        shape = RoundedCornerShape(CodeCustomTheme.Shape.medium)
                     )
             )
         } else {
@@ -69,8 +69,8 @@ fun WebLayout(
                     .weight(1f)
                     .border(
                         width = 1.dp,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
-                        shape = MaterialTheme.shapes.small
+                        color = CodeCustomTheme.Color.secondary.copy(alpha = 0.5f),
+                        shape = RoundedCornerShape(CodeCustomTheme.Shape.medium)
                     ),
                 factory = {
                     WebView(it).apply {

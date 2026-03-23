@@ -1,24 +1,24 @@
 package mx.dev.cmg.android.code.ui.feature.rest.layout
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import mx.dev.cmg.android.code.R
+import mx.dev.cmg.android.code.ui.atomicdesign.atom.CodeButton
 import mx.dev.cmg.android.code.ui.atomicdesign.particle.Title
+import mx.dev.cmg.android.code.ui.atomicdesign.subatomic.CodeCustomTheme
 import mx.dev.cmg.android.code.ui.feature.rest.viewmodel.RestEvent
 import mx.dev.cmg.android.code.ui.feature.rest.viewmodel.RestUiState
 
@@ -30,8 +30,9 @@ fun RestLayout(
 ) {
     Column(
         modifier = modifier
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+            .background(color = CodeCustomTheme.Color.background)
+            .padding(CodeCustomTheme.Spacing.s),
+        verticalArrangement = Arrangement.spacedBy(CodeCustomTheme.Spacing.s)
     ) {
         Title(
             modifier = Modifier.fillMaxWidth(),
@@ -40,7 +41,7 @@ fun RestLayout(
             onIconClick = { onEvent(RestEvent.NavigateBack) }
         )
 
-        Button(
+        CodeButton(
             enabled = !uiState.isLoading,
             modifier = Modifier.fillMaxWidth(),
             onClick = { onEvent(RestEvent.GetQuote) }
@@ -48,12 +49,13 @@ fun RestLayout(
 
             AnimatedVisibility(uiState.isLoading) {
                 CircularProgressIndicator(
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.size(CodeCustomTheme.Icon.s)
                 )
             }
 
             AnimatedVisibility(!uiState.isLoading) {
                 Text(
+                    style = CodeCustomTheme.Typography.body,
                     text = stringResource(R.string.obtener_respuesta)
                 )
             }
@@ -62,8 +64,9 @@ fun RestLayout(
         AnimatedVisibility(uiState.apiResponse != null) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
+                style = CodeCustomTheme.Typography.title,
+                color = CodeCustomTheme.Color.onBackground,
                 textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.titleLarge,
                 text = uiState.apiResponse ?: ""
             )
         }
@@ -71,9 +74,9 @@ fun RestLayout(
         AnimatedVisibility(uiState.apiResponse == null) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
+                style = CodeCustomTheme.Typography.body,
+                color = CodeCustomTheme.Color.primary.copy(alpha = 0.3f),
                 textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
                 text = stringResource(R.string.presiona_para_obtener_respuesta)
             )
         }
