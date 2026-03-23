@@ -226,6 +226,7 @@ fun MainNavHost(modifier: Modifier = Modifier) {
                     onNavigation = { sideEffect ->
                         when (sideEffect) {
                             is AiConversationSideEffect.NavigateBack -> backStack.navigateBack()
+                            else -> {}
                         }
                     }
                 )

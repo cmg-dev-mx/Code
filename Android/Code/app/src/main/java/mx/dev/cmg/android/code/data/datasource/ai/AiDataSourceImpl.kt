@@ -12,18 +12,22 @@ import com.google.firebase.ai.type.liveGenerationConfig
 @OptIn(PublicPreviewAPI::class)
 class AiDataSourceImpl : AiDataSource {
 
-    private val liveModel = Firebase.ai(backend = GenerativeBackend.googleAI())
-        .liveModel(
-            modelName = "gemini-2.5-flash-native-audio-preview-12-2025",
-            generationConfig = liveGenerationConfig {
-                responseModality = ResponseModality.AUDIO
-            }
-        )
-
     private lateinit var session: LiveSession
 
-    override suspend fun connect() {
-        session = liveModel.connect()
+    override suspend fun initialize(modelName: String): Result<Boolean> {
+        return try {
+            val liveModel = Firebase.ai(backend = GenerativeBackend.googleAI())
+                .liveModel(
+                    modelName = modelName,
+                    generationConfig = liveGenerationConfig {
+                        responseModality = ResponseModality.AUDIO
+                    }
+                )
+            session = liveModel.connect()
+            Result.success(true)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
     }
 
     @SuppressLint("MissingPermission")

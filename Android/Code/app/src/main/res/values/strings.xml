@@ -28,4 +28,6 @@
     <string name="open_web_in_layout">Abrir Web en Layout</string>
     <string name="open_web_in_custom_tab">Abrir Web en pestaña personalizada</string>
     <string name="ai_conversation">Conversación con IA</string>
+    <string name="ai_initialization_success">Conversación con IA inicializada correctamente</string>
+    <string name="ai_initialization_failed">Error al inicializar la conversación con IA</string>
 </resources>

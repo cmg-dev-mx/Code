@@ -17,17 +17,23 @@ class AiConversationViewModel(
     private val aiRepository: AiRepository
 ) : ViewModel() {
 
-    init {
-        viewModelScope.launch {
-            aiRepository.connect()
-        }
-    }
-
     private val _uiState = MutableStateFlow(AiConversationUiState())
     val uiState = _uiState.asStateFlow()
 
     private val _sideEffect = Channel<AiConversationSideEffect>(Channel.BUFFERED)
     val sideEffect = _sideEffect.receiveAsFlow()
+
+    init {
+        viewModelScope.launch {
+            aiRepository.initialize()
+                .onSuccess {
+                    _sideEffect.sendEffect(AiConversationSideEffect.AiInitializationSuccess)
+                }
+                .onFailure {
+                    _sideEffect.sendEffect(AiConversationSideEffect.AiInitializationFailed)
+                }
+        }
+    }
 
     fun onEvent(event: AiConversationEvent) = launchEvent {
         when (event) {
