@@ -1,18 +1,17 @@
 package mx.dev.cmg.android.code.ui.feature.textspeech.viewmodel
 
-import android.content.Context
-import android.speech.tts.TextToSpeech
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
+import mx.dev.cmg.android.code.data.repository.textspeech.TextSpeechRepository
 import mx.dev.cmg.android.code.ui.util.launchEvent
 import mx.dev.cmg.android.code.ui.util.sendEffect
 
-class TextSpeechViewModel(context: Context) : ViewModel() {
-
-    private val tts = TextToSpeech(context) {}
+class TextSpeechViewModel(
+    private val textSpeechRepository: TextSpeechRepository
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(TextSpeechUiState())
     val uiState = _uiState.asStateFlow()
@@ -35,7 +34,7 @@ class TextSpeechViewModel(context: Context) : ViewModel() {
     }
 
     private fun startSpeaking(text: String) {
-        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
+        textSpeechRepository.speak(text)
         _uiState.value = _uiState.value.copy(text = "")
     }
 }
