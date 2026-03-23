@@ -14,6 +14,8 @@ import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.scene.DialogSceneStrategy
 import androidx.navigation3.ui.NavDisplay
 import kotlinx.serialization.Serializable
+import mx.dev.cmg.android.code.ui.feature.aiconversation.layout.AiConversationScreen
+import mx.dev.cmg.android.code.ui.feature.aiconversation.viewmodel.AiConversationSideEffect
 import mx.dev.cmg.android.code.ui.feature.crash.layout.CrashScreen
 import mx.dev.cmg.android.code.ui.feature.crash.viewmodel.CrashSideEffect
 import mx.dev.cmg.android.code.ui.feature.datapersistence.layout.DataPersistenceScreen
@@ -61,6 +63,9 @@ data object Web : NavKey
 @Serializable
 data class InternalWeb(val url: String) : NavKey
 
+@Serializable
+data object AiConversation : NavKey
+
 @Composable
 fun MainNavHost(modifier: Modifier = Modifier) {
 
@@ -100,6 +105,9 @@ fun MainNavHost(modifier: Modifier = Modifier) {
 
                             MainSideEffect.NavigateToWebView ->
                                 backStack.navigateTo(Web)
+
+                            MainSideEffect.NavigateToAiConversation ->
+                                backStack.navigateTo(AiConversation)
                         }
                     }
                 )
@@ -191,6 +199,7 @@ fun MainNavHost(modifier: Modifier = Modifier) {
                             is WebMenuSideEffect.OpenWebInLayout -> backStack.navigateTo(
                                 InternalWeb(url = sideEffect.url)
                             )
+
                             is WebMenuSideEffect.OpenCustomTab -> {
                                 launchCustomTab(context = context, sideEffect.url)
                             }
@@ -208,6 +217,18 @@ fun MainNavHost(modifier: Modifier = Modifier) {
                         }
                     },
                     initialUrl = entry.url
+                )
+            }
+
+            entry<AiConversation> {
+                AiConversationScreen(
+                    modifier = Modifier.fillMaxSize(),
+                    onNavigation = { sideEffect ->
+                        when (sideEffect) {
+                            is AiConversationSideEffect.NavigateBack -> backStack.navigateBack()
+                            else -> {}
+                        }
+                    }
                 )
             }
         }

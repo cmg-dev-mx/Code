@@ -43,6 +43,16 @@ class RemoteConfigDataSourceImpl : RemoteConfigDataSource {
         }
     }
 
+    override suspend fun getString(key: String): String {
+        ensureFetchCompleted()
+
+        return try {
+            remoteConfig.getString(key)
+        } catch (_: Exception) {
+            ""
+        }
+    }
+
     private suspend fun ensureFetchCompleted(): Boolean {
         if (isFetchCompleted) return true
 
@@ -56,7 +66,7 @@ class RemoteConfigDataSourceImpl : RemoteConfigDataSource {
 
                 isFetchCompleted = true
                 success
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 isFetchCompleted = true
                 false
             }

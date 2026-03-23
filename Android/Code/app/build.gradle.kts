@@ -42,7 +42,7 @@ android {
     buildFeatures {
         compose = true
     }
-    ndkVersion = "29.0.14206865"
+    ndkVersion = "30.0.14904198"
 }
 
 room {
@@ -68,6 +68,7 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.config)
     implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.ai)
     implementation(libs.room)
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
@@ -79,6 +80,7 @@ dependencies {
     ksp(libs.moshi.codegen)
     implementation(libs.logging)
     implementation(libs.browser)
+    implementation(libs.accompanist.permissions)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
