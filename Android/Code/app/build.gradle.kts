@@ -80,6 +80,7 @@ dependencies {
     ksp(libs.moshi.codegen)
     implementation(libs.logging)
     implementation(libs.browser)
+    implementation(libs.accompanist.permissions)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
