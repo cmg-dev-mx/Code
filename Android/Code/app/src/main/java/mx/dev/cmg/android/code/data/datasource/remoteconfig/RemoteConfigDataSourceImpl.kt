@@ -8,6 +8,7 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withTimeoutOrNull
+import mx.dev.cmg.android.code.data.repository.color.ColorRepositoryImpl
 import mx.dev.cmg.android.code.domain.Feature
 import kotlin.time.Duration.Companion.seconds
 
@@ -28,7 +29,8 @@ class RemoteConfigDataSourceImpl : RemoteConfigDataSource {
 
     init {
         remoteConfig.setDefaultsAsync(
-            Feature.entries.associate { it.key to false }
+            Feature.entries.associate { it.key to false } +
+                mapOf(ColorRepositoryImpl.KEY_COLORS to ColorRepositoryImpl.DEFAULT_COLORS_JSON)
         )
         remoteConfig.setConfigSettingsAsync(configSettings)
     }
