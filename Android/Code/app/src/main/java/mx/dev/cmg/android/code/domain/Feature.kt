@@ -6,5 +6,6 @@ enum class Feature(val key: String) {
     PERSISTENCE("persistence"),
     SHARED("shared"),
     REST("rest"),
-    WEB("web")
+    WEB("web"),
+    AI_CONVERSATION("speech")
 }

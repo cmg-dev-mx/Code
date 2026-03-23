@@ -1,6 +1,7 @@
 package mx.dev.cmg.android.code
 
 import android.app.Application
+import mx.dev.cmg.android.code.di.aiModule
 import mx.dev.cmg.android.code.di.dataPersistenceModule
 import mx.dev.cmg.android.code.di.mainModule
 import mx.dev.cmg.android.code.di.remoteConfigModule
@@ -23,7 +24,8 @@ class CodeApplication : Application() {
                 dataPersistenceModule,
                 mainModule,
                 restModule,
-                webModule
+                webModule,
+                aiModule
             )
         }
     }
