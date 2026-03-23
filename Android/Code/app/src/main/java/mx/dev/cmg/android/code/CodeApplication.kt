@@ -7,6 +7,7 @@ import mx.dev.cmg.android.code.di.mainModule
 import mx.dev.cmg.android.code.di.remoteConfigModule
 import mx.dev.cmg.android.code.di.restModule
 import mx.dev.cmg.android.code.di.sharedPreferencesModule
+import mx.dev.cmg.android.code.di.textSpeechModule
 import mx.dev.cmg.android.code.di.webModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
@@ -25,7 +26,8 @@ class CodeApplication : Application() {
                 mainModule,
                 restModule,
                 webModule,
-                aiModule
+                aiModule,
+                textSpeechModule
             )
         }
     }

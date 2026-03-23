@@ -49,6 +49,12 @@ enum class FeatureUI(
         displayName = R.string.ai_conversation,
         icon = R.drawable.ic_ai_conversation,
         onClickEvent = MainEvent.NavigateToAiConversation
+    ),
+
+    TEXT_TO_SPEECH(
+        displayName = R.string.text_speech,
+        icon = R.drawable.ic_text_speech,
+        onClickEvent = MainEvent.NavigateToTextSpeech
     );
 
     companion object {
@@ -61,6 +67,7 @@ enum class FeatureUI(
                 Feature.REST -> REST_API
                 Feature.WEB -> WEB_VIEW
                 Feature.AI_CONVERSATION -> AI_CONVERSATION
+                Feature.TEXT_SPEECH -> TEXT_TO_SPEECH
             }
         }
     }

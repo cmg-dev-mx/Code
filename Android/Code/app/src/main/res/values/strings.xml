@@ -30,4 +30,7 @@
     <string name="ai_conversation">Conversación con IA</string>
     <string name="ai_initialization_success">Conversación con IA inicializada correctamente</string>
     <string name="ai_initialization_failed">Error al inicializar la conversación con IA</string>
+    <string name="text_speech">Texto a voz</string>
+    <string name="enter_text_to_speak">Ingrese texto para hablar</string>
+    <string name="speak">Hablar</string>
 </resources>
