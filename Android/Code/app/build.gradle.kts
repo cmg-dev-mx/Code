@@ -42,7 +42,7 @@ android {
     buildFeatures {
         compose = true
     }
-    ndkVersion = "29.0.14206865"
+    ndkVersion = "30.0.14904198"
 }
 
 room {
