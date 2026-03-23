@@ -43,6 +43,12 @@ enum class FeatureUI(
         displayName = R.string.web_view,
         icon = R.drawable.ic_web,
         onClickEvent = MainEvent.NavigateToWebView
+    ),
+
+    AI_CONVERSATION(
+        displayName = R.string.ai_conversation,
+        icon = R.drawable.ic_ai_conversation,
+        onClickEvent = MainEvent.NavigateToAiConversation
     );
 
     companion object {
@@ -54,6 +60,7 @@ enum class FeatureUI(
                 Feature.SHARED -> SHARED_PREFERENCES
                 Feature.REST -> REST_API
                 Feature.WEB -> WEB_VIEW
+                Feature.AI_CONVERSATION -> AI_CONVERSATION
             }
         }
     }

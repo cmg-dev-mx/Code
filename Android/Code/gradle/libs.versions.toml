@@ -6,13 +6,13 @@ junitVersion = "1.3.0"
 espressoCore = "3.7.0"
 lifecycleRuntimeKtx = "2.10.0"
 activityCompose = "1.13.0"
-kotlin = "2.3.10"
+kotlin = "2.3.20"
 composeBom = "2026.03.00"
 nav3Core = "1.0.1"
 nav3ViewModel = "2.10.0"
-koinBom = "4.1.1"
+koinBom = "4.2.0"
 googleServices = "4.4.4"
-firebaseBom = "34.10.0"
+firebaseBom = "34.11.0"
 crashlytics = "3.0.6"
 room = "2.8.4"
 ksp = "2.3.6"
@@ -22,6 +22,7 @@ retrofit = "3.0.0"
 moshi = "1.15.2"
 loggingInterceptor = "5.3.2"
 browser = "1.9.0"
+accompanistPermissions = "0.37.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -48,6 +49,7 @@ firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.r
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-config = { group = "com.google.firebase", name = "firebase-config" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics" }
+firebase-ai = { group = "com.google.firebase", name = "firebase-ai" }
 room = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
@@ -59,6 +61,7 @@ moshi-core = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref 
 moshi-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
 logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "loggingInterceptor" }
 browser = { group = "androidx.browser", name = "browser", version.ref = "browser" }
+accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanistPermissions" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

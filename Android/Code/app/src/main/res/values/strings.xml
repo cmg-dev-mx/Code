@@ -19,12 +19,15 @@
     <string name="shared_preferences">Shared Preferences</string>
     <string name="enable_edition">Habilitar edición</string>
     <string name="text_to_edit">Texto a guardar</string>
-    <string name="value_saved">Value saved successfully</string>
+    <string name="value_saved">Valor guardado satisfactoriamente</string>
     <string name="rest_api">Servicios Web</string>
     <string name="obtener_respuesta">Obtener una respuesta</string>
     <string name="presiona_para_obtener_respuesta">Presiona el botón para obtener una respuesta de la API y mostrarla aquí.</string>
     <string name="web_view">Web View</string>
     <string name="web_menu">Web Menu</string>
-    <string name="open_web_in_layout">Open Web in Layout</string>
-    <string name="open_web_in_custom_tab">Open Web in Custom Tab</string>
+    <string name="open_web_in_layout">Abrir Web en Layout</string>
+    <string name="open_web_in_custom_tab">Abrir Web en pestaña personalizada</string>
+    <string name="ai_conversation">Conversación con IA</string>
+    <string name="ai_initialization_success">Conversación con IA inicializada correctamente</string>
+    <string name="ai_initialization_failed">Error al inicializar la conversación con IA</string>
 </resources>
