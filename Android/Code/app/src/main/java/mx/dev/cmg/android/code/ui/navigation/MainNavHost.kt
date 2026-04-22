@@ -86,7 +86,7 @@ fun MainNavHost(modifier: Modifier = Modifier) {
             rememberViewModelStoreNavEntryDecorator()
         ),
         backStack = backStack,
-        sceneStrategy = dialogStrategy,
+        sceneStrategies = listOf(dialogStrategy),
         entryProvider = entryProvider {
             entry<Main> {
                 MainScreen(
