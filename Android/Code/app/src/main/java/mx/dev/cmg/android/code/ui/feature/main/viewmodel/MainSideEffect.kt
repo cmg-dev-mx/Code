@@ -8,4 +8,5 @@ sealed interface MainSideEffect {
     data object NavigateToRestApi: MainSideEffect
     data object NavigateToWebView: MainSideEffect
     data object NavigateToAiConversation: MainSideEffect
+    data object NavigateToTextSpeech: MainSideEffect
 }
