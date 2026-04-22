@@ -38,6 +38,7 @@ class MainViewModel(
             is MainEvent.NavigateToRestApi -> _sideEffect.sendEffect(MainSideEffect.NavigateToRestApi)
             is MainEvent.NavigateToWebView -> _sideEffect.sendEffect(MainSideEffect.NavigateToWebView)
             is MainEvent.NavigateToAiConversation -> _sideEffect.sendEffect(MainSideEffect.NavigateToAiConversation)
+            is MainEvent.NavigateToTextSpeech -> _sideEffect.sendEffect(MainSideEffect.NavigateToTextSpeech)
         }
     }
 

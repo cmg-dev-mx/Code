@@ -9,3 +9,5 @@
 .cxx
 local.properties
 google-services.json
+/.kotlin
+/gradle/gradle-daemon-jvm.properties

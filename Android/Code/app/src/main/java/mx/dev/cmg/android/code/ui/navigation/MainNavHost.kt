@@ -30,6 +30,8 @@ import mx.dev.cmg.android.code.ui.feature.rest.layout.RestScreen
 import mx.dev.cmg.android.code.ui.feature.rest.viewmodel.RestSideEffect
 import mx.dev.cmg.android.code.ui.feature.sharedpreferences.layout.SharedPreferencesScreen
 import mx.dev.cmg.android.code.ui.feature.sharedpreferences.viewmodel.SharedPreferencesSideEffect
+import mx.dev.cmg.android.code.ui.feature.textspeech.layout.TextSpeechScreen
+import mx.dev.cmg.android.code.ui.feature.textspeech.viewmodel.TextSpeechSideEffect
 import mx.dev.cmg.android.code.ui.feature.web.layout.WebMenuScreen
 import mx.dev.cmg.android.code.ui.feature.web.layout.WebScreen
 import mx.dev.cmg.android.code.ui.feature.web.viewmodel.WebMenuSideEffect
@@ -66,6 +68,9 @@ data class InternalWeb(val url: String) : NavKey
 @Serializable
 data object AiConversation : NavKey
 
+@Serializable
+data object TextSpeech : NavKey
+
 @Composable
 fun MainNavHost(modifier: Modifier = Modifier) {
 
@@ -81,7 +86,7 @@ fun MainNavHost(modifier: Modifier = Modifier) {
             rememberViewModelStoreNavEntryDecorator()
         ),
         backStack = backStack,
-        sceneStrategy = dialogStrategy,
+        sceneStrategies = listOf(dialogStrategy),
         entryProvider = entryProvider {
             entry<Main> {
                 MainScreen(
@@ -108,6 +113,9 @@ fun MainNavHost(modifier: Modifier = Modifier) {
 
                             MainSideEffect.NavigateToAiConversation ->
                                 backStack.navigateTo(AiConversation)
+
+                            MainSideEffect.NavigateToTextSpeech ->
+                                backStack.navigateTo(TextSpeech)
                         }
                     }
                 )
@@ -227,6 +235,17 @@ fun MainNavHost(modifier: Modifier = Modifier) {
                         when (sideEffect) {
                             is AiConversationSideEffect.NavigateBack -> backStack.navigateBack()
                             else -> {}
+                        }
+                    }
+                )
+            }
+
+            entry<TextSpeech> {
+                TextSpeechScreen(
+                    modifier = Modifier.fillMaxSize(),
+                    onNavigation = { sideEffect ->
+                        when (sideEffect) {
+                            is TextSpeechSideEffect.NavigateBack -> backStack.navigateBack()
                         }
                     }
                 )
