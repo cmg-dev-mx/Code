@@ -10,14 +10,12 @@ plugins {
 
 android {
     namespace = "mx.dev.cmg.android.code"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "mx.dev.cmg.android.code"
         minSdk = 26
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
