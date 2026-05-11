@@ -75,7 +75,7 @@ fun RestLayout(
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 style = CodeCustomTheme.Typography.body,
-                color = CodeCustomTheme.Color.primary.copy(alpha = 0.3f),
+                color = CodeCustomTheme.Color.primary.copy(alpha = 0.5f),
                 textAlign = TextAlign.Center,
                 text = stringResource(R.string.presiona_para_obtener_respuesta)
             )
